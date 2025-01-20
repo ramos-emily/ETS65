@@ -16,6 +16,10 @@
 
 # print(f"em 2025 você terá {AtualIdade}")
 
+
+
+
+
 #condicionais
 
 #exercicio1
@@ -47,7 +51,8 @@
 
 
 
-#while for
+
+#while/for
 
 #exercicio1
 # num = int(input("digite um numero inteiro positivo: "))
@@ -57,15 +62,42 @@
 
 #exercicio2
 
-num = 0
+# num = 0
 
-while (num >= 0):
-    num = int(input("digite um numero: "))
-    print("positivo")
+# while (num >= 0):
+#     num = int(input("digite um numero: "))
+#     print("positivo")
 
-print("esse numero é negativo")
+# print("esse numero é negativo")
 
 
+
+
+#funçao
+
+#exercicio1
+# s = ""
+
+# def inverter_string(s):
+#     palavra = input("digite uma palavra: ")
+#     for i in palavra:
+#         s = i + s
+#     print(s)
+
+# inverter_string(s)
+
+
+#exercicio2
+
+
+def contar_caracteres():
+    palavra = input("digite uma palavra: ")
+    lista = []
+    for i, letra in enumerate(palavra):
+       lista.append(f"{letra}{i+1}")
+
+    print(" ".join(lista)) 
+contar_caracteres()
 
 
 
