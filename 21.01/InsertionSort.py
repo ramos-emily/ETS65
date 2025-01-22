@@ -1,10 +1,7 @@
 #insertionSort
 
-# lista = [5, 2, 9, 1, 5, 6]
-
-
-# for i in lista:
-#     if i < proximo item:
+#[5, 2, 9, 1, 5, 6] lista dada
+#[1, 2, 5, 5, 6, 9] ordem correta
 
 def insertion_sort(array):
     for i in range(1, len(array)):

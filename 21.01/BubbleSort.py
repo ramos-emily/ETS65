@@ -1,5 +1,7 @@
-#bubblesort
+#bubble_sort
 
+# [5, 3, 8, 4, 2]
+# [2, 3, 4, 5, 8]
 
 def bubble_sort(arr):
     n = len(arr)
@@ -14,3 +16,14 @@ def bubble_sort(arr):
 lista = [5, 3, 8, 4, 2]
 bubble_sort(lista)
 print(lista)
+
+
+
+
+
+num = 1
+
+
+teste = int(input("testando: "))
+result = teste + num
+print(result)
