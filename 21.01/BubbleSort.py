@@ -21,9 +21,7 @@ print(lista)
 
 
 
-num = 1
+num = 1; teste = int(input("testando: ")); result = teste + num; print(result)
 
 
-teste = int(input("testando: "))
-result = teste + num
-print(result)
+
