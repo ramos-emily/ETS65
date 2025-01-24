@@ -1,0 +1,1 @@
+# 22.	Implemente um sistema para gerenciar um estoque de produtos com classes como Produto, Categoria, Fornecedor, Compra, Venda. Inclua funcionalidades de controle de quantidade, preço de compra, preço de venda e relatórios de inventário.

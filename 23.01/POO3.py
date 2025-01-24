@@ -10,6 +10,8 @@ class retangulo:
         area_retangulo = self.largura * self.altura
         print(f"a area do retangulo é: {area_retangulo}")
 
+area()
+
 
 
     # def perimetro(self, retangulo):

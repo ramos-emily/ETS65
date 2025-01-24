@@ -1,0 +1,1 @@
+# 25.	Crie um jogo de combate onde personagens são objetos com atributos como saúde, força, defesa, e habilidades especiais. Implemente combate entre personagens, uso de itens (como poções de cura), e eventos de vitória ou derrota. O sistema pode incluir também níveis de experiência e evolução dos personagens.

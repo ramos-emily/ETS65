@@ -26,6 +26,19 @@ class ContaBancaria:
     def consultar_saldo(self):
         print(f"Saldo atual: R${self.saldo:.2f}")
 
+conta1 = ContaBancaria(123, "João", 1000)
+conta2 = ContaBancaria(456, "Maria", 500)
+
+conta1.consultar_saldo()
+conta2.consultar_saldo()
+
+conta1.deposito(200)
+
+conta2.saque(100)
+
+conta1.consultar_saldo()
+conta2.consultar_saldo()
+
 
 
 

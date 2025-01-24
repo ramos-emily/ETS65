@@ -1,0 +1,1 @@
+# 24.	Desenvolva um sistema de gestão de um zoológico, com classes para Animal, Habitat, Alimentação, Veterinário, e Funcionário. Cada tipo de animal terá características específicas, como dieta e necessidades ambientais, e o sistema deve permitir o controle de alimentação, saúde e movimentação dos animais.

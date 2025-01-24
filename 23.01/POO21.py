@@ -1,0 +1,1 @@
+# 21.	Construa uma aplicação de e-commerce onde produtos, clientes e pedidos são objetos. Adicione funcionalidades como carrinho de compras, desconto, cálculo de frete, histórico de compras e recomendação de produtos com base nas compras anteriores.
