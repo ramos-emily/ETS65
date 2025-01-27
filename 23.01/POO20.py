@@ -94,7 +94,6 @@ class Rainha(Peca):
         torre = Torre(self.cor)
         bispo = Bispo(self.cor)
 
-        # Combina os movimentos da torre e do bispo
         movimentos += torre.movimentos_validos(posicao, tabuleiro)
         movimentos += bispo.movimentos_validos(posicao, tabuleiro)
 

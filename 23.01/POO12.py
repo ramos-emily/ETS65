@@ -4,7 +4,6 @@ class LojaVirtual:
     def __init__(self):
         self.estoque = {}
 
-    
     def cadastro(self, nome, preco):
         self.estoque[nome] = preco
         print(f"{nome} adicionado ao cadastro!")
