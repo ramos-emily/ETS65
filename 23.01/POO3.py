@@ -1,17 +1,24 @@
 # crie uma classe chamada "Retangulo" que possua atributos para armazenar a largura e a altura. implemente metodos para calcular a area e o perimetro do retangulo
 
-class retangulo:
-
-    def __init__ (self, largura, altura):
-        self.largura = largura
+class Retangulo:
+    def __init__(self,altura,largura):
         self.altura = altura
+        self.largura = largura
 
-    def area (self, retangulo):
-        area_retangulo = self.largura * self.altura
-        print(f"a area do retangulo é: {area_retangulo}")
+    def area(self):
+        return self.altura * self.largura
 
-area()
+    def perimetro(self):
+        return (self.altura * 2) + (self.largura * 2)
+
+altura = int(input("Digite a altura do retangulo: "))
+largura = int(input("Digite a largura do retangulo: "))
+
+retangulo = Retangulo(altura, largura)
+
+print(retangulo.area())
+print(retangulo.perimetro())
 
 
 
-    # def perimetro(self, retangulo):
+    
