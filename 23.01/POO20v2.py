@@ -1,4 +1,4 @@
-#aqui so tentei fazer uma versao com tkinter, mas nao funcionou
+#aqui so tentei fazer uma versao com tkinter, mas nao funcionou kkkkkkkkk
 
 import tkinter as tk
 from tkinter import messagebox
