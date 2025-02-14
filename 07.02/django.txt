@@ -20,4 +20,14 @@ ctrl c pra voltar
 
 django-admin startapp OutroNome
 
-code .
+
+criar admin: python manage.py createsuperuser
+
+
+
+
+para startar precisa: estar na pasta e dar runserver
+
+
+
+

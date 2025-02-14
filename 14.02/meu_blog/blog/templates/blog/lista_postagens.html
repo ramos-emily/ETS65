@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+</head>
+<body>
+    <h1>Blog</h1>
+    <h1>aaaaaaaaa</h1>
+    <ul>
+        {% for postagem in postagens %}
+        <li>
+        <h2>{{ postagem.titulo }}</h2>
+        <p>{{ postagem.conteudo|slice:":200" }}...</p>
+        <p><a href="#">Leia mais</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
