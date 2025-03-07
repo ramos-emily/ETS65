@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1>Tem certeza que deseja excluir "{{ book.title }}"?</h1>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Sim, excluir</button>
-</form>
-<a href="{% url 'book_list' %}">Cancelar</a>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir este livro</button>
+    </form>
+    <a href="{% url 'book_list' %}">Cancelar</a>
 </body>
 </html>

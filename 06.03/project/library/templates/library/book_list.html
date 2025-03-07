@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Livros</title>
+    
 </head>
 <body>
     <h1>Livros da Biblioteca</h1>
     <a href="{% url 'book_create' %}">Adicionar Livro</a>
     <ul>
-        {% for books in book %}
+        {% for book in books %}
             <li>
-                <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
-                <a href="{% url 'book_update' book.pk %}">Editar</a>
-                <a href="{% url 'book_delete' book.pk %}">Excluir</a>
+                <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a> - {{ book.author }} ({{ book.year }})
+                <span class="actions">
+                    <a href="{% url 'book_update' book.pk %}">Editar</a>
+                    <a href="{% url 'book_delete' book.pk %}">Excluir</a>
+                </span>
             </li>
         {% endfor %}
     </ul>
