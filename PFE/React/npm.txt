@@ -1,0 +1,8 @@
+npm create vite@latest   
+npm install
+npm run dev
+
+
+
+
+coolors - paleta de colors

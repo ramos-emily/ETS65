@@ -1,0 +1,68 @@
+img:not(.backgroundRedImg) {
+  transition: all 0.3s ease-in-out;
+}
+/* efeito de crescer imagme quando passa o mouse */
+/* exceto (.backgroundRedImg) */
+
+img:hover:not(.backgroundRedImg) {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* meu nome na barra de informaçoes */
+.titulo {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* imagem inicial da minha personagem em pixelart */
+.bonequinha {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+
+.sobremim h2{
+  display: flex;
+  justify-content: center;
+  padding-top: 200px;
+  padding-bottom: 50px;
+  font-size: 50px;
+}
+
+
+.sobremim p {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  position: absolute;
+  text-align: center;
+  color: white;
+}
+
+.gostos p {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  font-size: 50px;
+}
+
+/*imagens das coisas que gostos(livros, filmes e musicas) */
+.imgGostos{
+  width: 25%;
+  padding-left: 120px;
+}
+
+
+/* imagem vermelha no fundo da minha descrição */
+.backgroundRed{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

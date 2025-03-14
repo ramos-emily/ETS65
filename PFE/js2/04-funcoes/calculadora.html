@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Calculadora</h1>
+
+    <label for="numero1">Primeiro número: </label>
+    <input id="numero1" /><br /><br />
+
+    <label for="numero2">Segundo número: </label>
+    <input id="numero2" /><br />
+
+    <p class="label">Operações</p>
+
+    <input type="radio" id="somar" name="operacoes" value="somar" checked/>
+    <label for="somar">Somar</label><br />
+
+    <input type="radio" id="subtrair" name="operacoes" value="subtrair" />
+    <label for="subtrair">Subtrair</label><br />
+
+    <input type="radio" id="multiplicar" name="operacoes" value="multiplicar" />
+    <label for="multiplicar">Multiplicar</label><br />
+
+    <input type="radio" id="dividir" name="operacoes" value="dividir" />
+    <label for="dividir">Dividir</label><br /><br />
+
+    <button id="btn-calcular">Calcular</button>
+
+    <p id="resultado"></p>
+
+    <script src="calculadora.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+.container {
+    height: 100vh;
+    background-color: black;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.containerBotoes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.titulo{
+    color: bisque;
+    text-align: center;
+    font-size:2.5rem;
+}

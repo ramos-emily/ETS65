@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../global.css">    
+    <title>Controle escolar</title>
+</head>
+<body>
+
+    <div class="conteiner-escola">
+
+        <h1>Controle escolar</h1>
+
+        <label for="nome" class="item label">Nome</label>
+        <input id="nome" class="item campo" type="text" />
+
+        <label for="nota" class="item label">Nota</label>
+        <input id="nota" class="item campo" type="number" />
+
+        <label for="frequencia" class="item label">Frequência</label>
+        <input id="frequencia" class="item campo" type="number" />
+
+        <label id="recuperacao-label" for="recuperacao" class="item label" hidden>Recuperação</label>
+        <input id="recuperacao" class="item campo" type="number" hidden/>
+
+        <button id="btn-verificar" class="item botao">Verificar</button>
+    
+        <label for="mensagem" class="item label">Mensagem</label>
+        <p id="mensagem" class="item saida"></p>    
+
+    </div>
+
+    <script src="./controleEscolar.js"></script>
+</body>
+</html>

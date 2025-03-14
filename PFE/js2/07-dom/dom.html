@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../global.css">
+    <title>Modelo de Objeto de Documento (DOM)</title>
+</head>
+<body>
+
+    <h1>Modelo de Objeto de Documento (DOM)</h1>
+    <ul class="assuntos">
+        <li>Objeto window</li>
+        <li>Objeto document</li>
+        <li>Manipulação de elementos HTML</li>
+        <li>Manipulação de estilos CSS</li>
+        <li>Exemplo Lista</li>
+        <li>Exemplo Calculadora</li>
+    </ul>
+    
+    <h2>Visualização dos testes</h2>
+
+    <p>Acesse as Ferramentas de Desenvolvedor ou Desenvolvimento (F12)<br> 
+       Guia console, para vizualizar as saídas com a função console.log()</p>
+
+    <h2>Materiais de apoio</h2>
+
+    <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Document_Object_Model/Introduction" target="_blank">Introdução ao DOM</a><br>
+    <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Window" target="_blank">Window</a><br>
+    <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Document" target="_blank">Document</a><br>
+
+
+    <h2 id="exemplos">Integração do JS com HTML e CSS</h2>
+
+    <fieldset class="conteiner-exemplos">
+
+        <div class="conteiner-mensagem">
+
+            <h2 id="exemplo-lista">Lista</h2>
+
+            <label for="nome" class="item label">Nome</label>
+            <input id="nome" class="item campo" type="text" />
+        
+            <button id="btn-mensagem" class="item botao">Enviar</button>
+        
+            <label for="mensagem" class="item label">Mensagem</label>
+            <p id="mensagem" class="item saida"></p>    
+
+            <ol id="lista" class="item"></ol>    
+
+        </div>
+
+        <div class="conteiner-calculadora">
+
+            <h2 id="exemplo-calculadora">Calculadora</h2>
+
+            <label for="n1" class="item label">Primeiro número</label>
+            <input id="n1" class="item campo" type="text" />
+
+            <label for="n2" class="item label">Segundo número</label>
+            <input id="n2" class="item campo" type="text" />
+    
+            <p class="label">Operações</p>
+            <div>
+                <input type="radio" id="somar" name="operacoes" value="somar" checked/>
+                <label for="somar">Somar</label>
+            </div>                                                                                    
+            <div>
+                <input type="radio" id="subtrair" name="operacoes" value="subtrair" />
+                <label for="subtrair">Subtrair</label>
+            </div>
+            <div>
+                <input type="radio" id="multiplicar" name="operacoes" value="multiplicar" />
+                <label for="multiplicar">Multiplicar</label>
+            </div>
+            <div>
+                <input type="radio" id="dividir" name="operacoes" value="dividir" />
+                <label for="dividir">Dividir</label>
+            </div>
+
+            <button id="btn-calcular" class="item botao">Calcular</button>
+
+            <button id="btn-limpar" class="item botao">Limpar</button>
+        
+            <label for="resultado" class="item label">Resultado</label>
+            <p id="resultado" class="item saida"></p>    
+
+        </div>
+
+    </fieldset>
+
+    <h2>Exercícios</h2>
+
+    <a href="./controleEscolar.html" target="_blank">Controle escolar</a><br>
+    <a href="/" target="_blank">Lista 07</a><br>    
+
+    <a href="../index.html">
+        <div class="botao">
+            <p>Voltar</p>
+        </div>
+    </a>
+
+    <p class="rodape">Prof. Ralfe Della Croce Filho</p>
+
+    <script src="dom.js"></script>
+</body>
+</html>
