@@ -1,0 +1,22 @@
+.gridConteiner{
+    background-color: black;
+    display: grid;
+    gap: 20px;
+    height: 100vh;
+}
+
+.cabecalho{
+    background-color: blue;
+}
+
+.lateral{
+    background-color: palevioletred;
+}
+
+.principal{
+    background-color:green;
+}
+
+.rodape{
+    background-color: red;
+}
