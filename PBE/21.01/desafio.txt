@@ -1,0 +1,10 @@
+DESAFIOS:
+
+
+pesquisar como funciona o Merge Sort. E implemente o algoritmo Merge Sort sem utilizar funções ou bibilhotecas prontas.
+
+Faça o mesmo com insert Sort e com Bubble Sort
+
+Faça o mesmo com os algoritmos de Busca Linear, besca Binária
+
+Pesquise sobre complexidade de algoritmo e calcule a complexiadade dps algoritmos anteriores
