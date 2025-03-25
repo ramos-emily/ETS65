@@ -1,13 +1,14 @@
 import estilos from './Botao.module.css'
 
-export function Botao({titulo,acao}){
+export function Botao ({titulo, acao}){
+    
+    
     return(
-        <div 
-            onClick={acao}
-            className={estilos.container}
+        <div
+         className={estilos.conteiner}
+         onClick={acao}
         >
             <p className={estilos.texto}>{titulo}</p>
-            
         </div>
     )
 }

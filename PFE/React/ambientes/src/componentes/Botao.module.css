@@ -1,16 +1,15 @@
-.container{
-    width: 150px;
-    padding: 20px;
-    background-color: blue;
-    border-radius: 10px;
+.conteiner {
+    background-color: rgb(83, 83, 83);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20px;
+    width: 100px;
+    height: 50px;
+    
 }
 
-.texto{
-    text-align: center;
-    color: bisque;
-    font-size: 1rem;
+.texto {
+    color: white;
+    
 }
+

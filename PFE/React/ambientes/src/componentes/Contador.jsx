@@ -1,33 +1,44 @@
 import estilos from './Contador.module.css'
-import { useState } from 'react' //faz a renderização de variavel
+import {useState} from 'react'
 
-export function Contador(){
+export function Contador (){
 
-    const[valor, setValor] = useState(0)
+    const [valor, SetValor] = useState(0)
+    
 
     const somar = () => {
-        setValor(valor + 1) 
-    }
-    const subatrair= () => {
-        setValor(valor - 1)
+        SetValor(valor + 1)
+        console.log(valor) 
     }
 
-    return(
+    const subtrair = () => {
+        SetValor(valor - 1)
+        console.log(valor) 
+    }
+    
+    
+
+    
+    return (
         <div className={estilos.conteiner}>
-            <p className={estilos.titulo}>Contador</p>
+            <p className={estilos.valor}>Contador</p>
+            
             <div className={estilos.conteinerBotoes}>
-                <div
-                 className={estilos.botao}
-                 onClick={subatrair}
+
+                <div className={estilos.botao}
+                ></div>
+
+                <div className={estilos.subtrair}
+                onClick={subtrair}
                 >-</div>
+
                 <p className={estilos.valor}>{valor}</p>
-                <div
-                className={estilos.botao}
+
+                <div className={estilos.somar}
                 onClick={somar}
                 >+</div>
-        </div>
-            
-        </div>
+            </div>   
         
-    )
+        </div>
+    )   
 }
