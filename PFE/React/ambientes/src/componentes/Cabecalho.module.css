@@ -1,6 +1,11 @@
 .conteiner {
-    background-color: white;
+    background-color:var(--cinza-escuro);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.titulo{
+    font-size: 2rem;
+    color: var(--branco);
 }

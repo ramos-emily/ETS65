@@ -1,0 +1,35 @@
+.conteiner{
+    display: flex;
+    flex-direction: column; 
+    /*linha de cima é para deixar em debaixo do outro*/
+    justify-content: center;
+    align-items: center;
+    background-color: var(--azul-claro);
+    height: 100vh;
+}
+
+.titulo{
+    font-size: 1.5rem;
+    color: var(--cinza-escuro);
+    margin-bottom: 20px;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cinza-claro);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.campo{
+    padding: 10px 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.botao{
+    padding: 10px 5px;
+    background-color: var(--azul-claro);
+    border-radius: 10px;
+}
