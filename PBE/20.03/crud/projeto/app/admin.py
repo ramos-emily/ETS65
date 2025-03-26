@@ -1,5 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Dados
+from .models import Evento
 
-admin.site.register(Dados)
+admin.site.register(Evento)
