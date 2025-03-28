@@ -4,12 +4,12 @@ from .models import UserAbs
 # Register your models here.
 
 class UserAbsAdmin(UserAdmin):
-    list_display = ('username', 'email', 'telefone', 'cargo', 'is_staff')
+    list_display = ('username', 'escolaridade', 'idade', 'bio', 'animais', 'telefone', 'endereco', 'is_staff')
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields':('telefone', 'cargo')}),
+        (None, {'fields':('escolaridade', 'idade', 'bio', 'animais', 'telefone', 'endereco')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields':('telefone', 'cargo')}),
+        (None, {'fields':('escolaridade', 'idade', 'bio', 'animais', 'telefone', 'endereco')}),
     )
 
 admin.site.register(UserAbs, UserAbsAdmin)
