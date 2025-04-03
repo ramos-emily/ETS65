@@ -28,6 +28,235 @@ criar admin: python manage.py createsuperuser
 
 para startar precisa: estar na pasta e dar runserver
 
+.gitignore
+
+
+env
+venv
+.env
+.venv
+
+
+
+
+
+
+
+settings -> 'app', 'djangorestframework'
+
+
+models:
+from django.db import models
+
+class UserAbs(AbstractUser):
+    escolaridade = models.CharField(max_length=30, blank=True, null=True)
+    idade =  models.PositiveIntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.escolaridade 
+
+
+dar makemigrate, migrate
+
+
+criar superusuario
+
+
+admin:
+
+from django.contrib import admin
+from .models import NomeDoModelo
+
+admin.site.register(NomeDoModelo)
+
+
+serializer:
+
+from rest_framework import serializers
+from .models import escolaridade
+
+class NomeDoModeloSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NomeDoModelo
+        fields = '__all__' 
+
+
+Views:
+
+#listar
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def listar_usuario(request):
+    usuarios = UserAbs.objects.all()
+    serializer = UserAbsSerializer(usuarios, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+#detalhes
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def detalhes_usuario(request, pk):
+    userAbs = get_object_or_404(UserAbs, pk=pk)
+    serializer = UserAbsSerializer(userAbs)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+#criar
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def criar_usuario(request):
+    serializer = UserAbsSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+#att
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def atualizar_usuario(request, pk):
+    userAbs = get_object_or_404(UserAbs, pk=pk)
+    serializer = UserAbsSerializer(userAbs, data=request.data, partial=True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Deletar 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deletar_usuario(request, pk):
+    userAbs = get_object_or_404(UserAbs, pk=pk)
+    userAbs.delete()
+    return Response({'mensagem': 'Usuário deletado com sucesso'}, status=status.HTTP_204_NO_CONTENT)
+
+
+urls app:
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('criarUsuario/', view=views.create_user, name='create_user'),
+]
+
+
+urls projeto:
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('app.urls'))
+]
+
+
+
+FIM!!!
+
+
+
+
+
+
+
+
+
+COM TEMPLATES!
+
+
+view:
+
+def lista_itens(request):
+    itens = NomeDoSeuModelo.objects.all()
+    return render(request, 'meutemplate.html', {'itens': itens})
+
+
+urls:
+
+urlpatterns = [
+    path('itens/', lista_itens, name='lista_itens'),
+]
+
+
+
+
+
+
+
+
+
+
+
+
+COM FRONT!
+
+
+
+
+(criar o front com react)
+pip install django-cors-headers
+
+
+MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:0000",
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESUMO:
+
+
+
+
+
+1- Criar e aplicar migrações (makemigrations e migrate).
+
+2- Criar um superusuário (opcional).
+
+3- Registrar os models no Django Admin (opcional).
+
+4- Criar serializers.py (se for usar Django REST Framework).
+
+5- Criar views.py com lógica de CRUD.
+
+6- Configurar urls.py para as rotas da API ou da interface.
+
+7- Testar os endpoints com Postman, Django Shell ou navegador.
+
+8- Configurar CORS (se precisar acessar de outro domínio).
+
+9- Criar interface gráfica HTML (se não for só API).
+
+10- Criar testes automatizados para validar o CRUD.
+
+
+
+
 
 
 
