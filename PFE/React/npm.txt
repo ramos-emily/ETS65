@@ -1,9 +1,0 @@
-npm create vite@latest   
-npm install
-npm install react-icons --save
-npm run dev
-
-
-
-
-coolors - paleta de colors
