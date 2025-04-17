@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from .models import Pato
 from .serializers import *
 from rest_framework.pagination import PageNumberPagination
@@ -47,7 +47,7 @@ class PatoRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
             request.__full_data = data
         return super().put(request, *args, **kwargs)
     
-class LoginView():
+class LoginView(CreateAPIView):
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
