@@ -1,0 +1,27 @@
+.conteiner {
+    background-color: var(--rosa-sombra);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo{
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding-right: 200px;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.titulo{
+    color: var(--rosa);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
