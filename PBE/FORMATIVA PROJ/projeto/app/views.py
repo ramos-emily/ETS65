@@ -1,37 +1,56 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .models import *
+from .models import Professor, Disciplina, ReservaAmbiente
+from .serializers import ProfessorSerializer, DisciplinaSerializer, ReservaAmbienteSerializer
+from .permissions import IsGestor, IsProfessorOwner
+from rest_framework.permissions import IsAuthenticated
 
+class ProfessorListCreateAPIView(ListCreateAPIView):
+    queryset = Professor.objects.all()
+    serializer_class = ProfessorSerializer
 
-class ProfessorListView(ListView):
-    model = Professor
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsGestor()]
 
-class ProfessorCreateView(CreateView):
-    model = Professor
+class ProfessorDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Professor.objects.all()
+    serializer_class = ProfessorSerializer
 
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+    def get_permissions(self):
+        return [IsGestor()]
 
-class ProfessorDeleteView(DeleteView):
-    model = Professor
+class DisciplinaListCreateAPIView(ListCreateAPIView):
+    queryset = Disciplina.objects.all()
+    serializer_class = DisciplinaSerializer
 
-class ProfessorUpdateView(UpdateView):
-    model = Professor
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsGestor()]
 
+class DisciplinaDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Disciplina.objects.all()
+    serializer_class = DisciplinaSerializer
 
-# class PlanetaListCreateAPIView(ListCreateAPIView):
-#     queryset = Planet.objects.all()
-#     serializer_class = PlanetaSerializer
-#     def get_permissions(self):
-#         if self.request.method == 'GET':
-#             return [IsAuthenticated()]
-#         return [isHumano]
+    def get_permissions(self):
+        return [IsGestor()]
 
+class ReservaListCreateAPIView(ListCreateAPIView):
+    queryset = ReservaAmbiente.objects.all()
+    serializer_class = ReservaAmbienteSerializer
 
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsGestor()]
 
-# class RetrieveUserView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     lookup_fields = ['account', 'username']
+class ReservaDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = ReservaAmbiente.objects.all()
+    serializer_class = ReservaAmbienteSerializer
 
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsGestor() | IsProfessorOwner()]
+    
