@@ -1,3 +1,21 @@
+/* Estrutura da instrtução select
+
+	select (seleção) -> Atributos (colunas) que serão apresentadas
+    from (origem) -> Tabela de referencia para bsuca dos dados
+    where (filtros) -> Registro (linhas) que serao apresentadas
+    order by ()
+*/
+
+
+
+
+
+
+
+
+
+
+
 use fastbank;
 
 
@@ -61,7 +79,7 @@ where valor between 1000 and 3000;
 
 
 select codigo_operacao as 'Código de Operação',
-	valor
+	   valor
 from movimentacao
 where valor between 1000 and 3000
 order by valor; -- ordenando a coluna para ordem crescente
@@ -129,20 +147,16 @@ group by codigo_operacao;
 
 -- Formatações
 
-
 -- Moeda 
 select format(valor_solicitado, '2', 'pt_BR' ) as 'Português Brazil',
 		format(valor_solicitado, '2', 'de_DE') as 'German',
         format(valor_solicitado, '2', 'en_US') as 'US Engilsh'
 from emprestimo;
-
- 
 -- Porcentagem
 select juros as 'Como fração',
 	format(juros * 100, '2') as 'Como inteiro',
     concat(format(juros * 100, '2'), '%') as 'Como porcentagem'
 from emprestimo;
-
 
 -- Data
 select date_format(data_solicitacao, '%d/%m/%y') as 'Data abrevidada',
@@ -160,6 +174,96 @@ select time_format(data_hora, '%h:%i:%s') as 'Horário da movimentação',
 		time_format(data_hora, '%r') as 'Horário da movimentação'
 from movimentacao;
 
+-- Retorna a data do servidor
+select curdate() as 'Data',
+	   curtime() as 'Hora';
+
+select current_date() as 'Data',
+	   current_time() as 'Hora',
+       current_timestamp() as 'Data e Hora';
+       
+select date_format(data_solicitacao, '%d/%m/%y') as 'Data de solicitação',
+	   day(data_solicitacao) as 'Dia',
+       month(data_solicitacao) as 'Mês',
+       year(data_solicitacao) as 'Ano'
+from emprestimo;
+
+-- Calcular diferença entre datas
+select datediff('2025-04-28', '2025-01-01');
+
+select datediff(current_date(), '2025-01-01');
+
+-- Calcular diferença entre horas
+select timestampdiff(day, '2025-01-01', now()),
+	   timestampdiff(month, '2025-01-01', now()),
+       timestampdiff(year, '2025-01-01', now());
+       
+select datediff(current_date(), data_solicitacao) as 'Dias a partir da solicitação'
+from emprestimo;
+
+-- Manipulação de textos
+
+select nome_razaosocial
+from cliente
+where codigo = 10;
+
+update cliente
+set nome_razaosocial = ''
+where codigo = 10;
+
+-- trim (desconsidera espaços em brancos antes e depois do texto)
+select nome_razaosocial
+from cliente
+where trim(nome_razaosocial) = '';
+
+-- char_lenght (retorna a quantidade de caracteres de um texto)
+select nome_razaosocial,
+	   char_length(nome_razaosocial) as 'Qtde caracteres'
+from cliente
+where codigo = 9;
+
+-- left (retona caraterees a esquerda)
+select nome_razaosocial,
+	   left(nome_razaosocial, 10) as 'caracteres a esquerda'
+from cliente
+where codigo = 9;
+
+
+-- pesquisa se um (ou main) caracter exoiste no texto
+select nome_razaosocial,
+	   position('de' in nome_razaosocial)
+from cliente where codigo = 6;
+
+-- substring (retorna uma parte do texto)
+select nome_razaosocial,
+	   substring(nome_razaosocial, position('' in nome_razaosocial), 10)
+from cliente
+where codigo = 5;
+
+
+-- letras minusculas
+select nome_razaosocial,
+	   lower(nome_razaosocia)
+from cliente
+where codigo = 4;
+
+-- letras maiusculas
+select nome_razaosocial,
+	   upper(nome_razaosocia)
+from cliente
+where codigo = 4;
+
+-- Concatenaçoes
+select concat(nome_razaosocial,': ', usuario, '(',  senha, ')')
+from cliente
+
+
+
+
+
+
+
+	
 
 
 
