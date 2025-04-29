@@ -5,12 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom"; 
 
 const loginSchema = z.object({
-  ni: z.string().length(7, { message: "Insert a valid ni" }),
-  name: z.string().min(3, { message: "Insert a valid name" }),
-  email: z.string().email({ message: "Insert a valid email" }),
-  cellphone: z.string().min(10, { message: "Insert a valid cellphone" }),
-  birthDate: z.string().transform((value) => new Date(value)),
-  hiringDate: z.string().transform((value) => new Date(value)),
+  email: z.string()
+    .email({message: 'Informe um e-mail válido!'}) ,
+  senha: z.string()
+    .length(6, {message: 'Defina uma senha de 6 caracteres!'})
 });
 
 export function Login() {
@@ -33,45 +31,10 @@ export function Login() {
       <p className={styles.title}>LOGIN</p>
 
       <form onSubmit={handleSubmit(userAutenticate)} className={styles.form}>
-        <input {...register("ni")} placeholder="NI" className={styles.field} />
+        <input {...register("email")} placeholder="Email" className={styles.field} />
         {errors.ni && <p>{errors.ni.message}</p>}
-
-        <input
-          {...register("name")}
-          placeholder="Nome"
-          className={styles.field}
-        />
-        {errors.name && <p>{errors.name.message}</p>}
-
-        <input
-          {...register("email")}
-          placeholder="Email"
-          className={styles.field}
-        />
-        {errors.email && <p>{errors.email.message}</p>}
-
-        <input
-          {...register("cellphone")}
-          placeholder="Telefone"
-          className={styles.field}
-        />
-        {errors.cellphone && <p>{errors.cellphone.message}</p>}
-
-        <input
-          {...register("birthDate")}
-          placeholder="Data de nascimento"
-          className={styles.field}
-          type="date"
-        />
-        {errors.birthDate && <p>{errors.birthDate.message}</p>}
-
-        <input
-          {...register("hiringDate")}
-          placeholder="Data de contratação"
-          className={styles.field}
-          type="date"
-        />
-        {errors.hiringDate && <p>{errors.hiringDate.message}</p>}
+        <input {...register("senha")} placeholder="Senha" className={styles.field} />
+        {errors.ni && <p>{errors.ni.message}</p>}
 
         <button type="submit" className={styles.button}>
           Logar

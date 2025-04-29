@@ -20,20 +20,20 @@ export function Principal({ secao }) {
           <input name="telefone" placeholder="Telefone" />
           <input name="nascimento" placeholder="Data de Nascimento" type="date" />
           <input name="contratacao" placeholder="Data de Contratação" type="date" />
-          <input name="disciplinas" placeholder="Disciplinas Atribuídas" />
-          <button type="submit">Salvar Professor</button>
+          <input name="disciplinas" placeholder="Disciplinas" />
+          <button type="submit">Confirmar</button>
         </form>
       )}
 
       {secao === "disciplina" && (
         <form className={styles.formulario} onSubmit={handleSubmit}>
           <h2 className={styles.titulo}>Cadastro de Disciplina</h2>
-          <input name="nome" placeholder="Nome da Disciplina" />
+          <input name="nome" placeholder="Nome" />
           <input name="curso" placeholder="Curso" />
           <input name="cargaHoraria" placeholder="Carga Horária" type="number" />
           <input name="descricao" placeholder="Descrição" />
-          <input name="professor" placeholder="Professor Responsável" />
-          <button type="submit">Salvar Disciplina</button>
+          <input name="professor" placeholder="Professor" />
+          <button type="submit">Confirmar</button>
         </form>
       )}
 
@@ -48,16 +48,19 @@ export function Principal({ secao }) {
             <option value="tarde">Tarde</option>
             <option value="noite">Noite</option>
           </select>
-          <input name="sala" placeholder="Sala Reservada" />
-          <input name="professor" placeholder="Professor Responsável" />
-          <input name="disciplina" placeholder="Disciplina Associada" />
-          <button type="submit">Salvar Reserva</button>
+          <input name="sala" placeholder="Sala" />
+          <input name="professor" placeholder="Professor" />
+          <input name="disciplina" placeholder="Disciplina" />
+          <button type="submit">Reservar</button>
         </form>
       )}
 
       {secao === "agendamento" && (
         <form className={styles.formulario} onSubmit={handleSubmit}>
-          <h2 className={styles.titulo}>Agendamento</h2>
+          <h2 className={styles.titulo}>Sala</h2>
+          <input name="Descrição" placeholder="Descrição" />
+          <input name="Localização" placeholder="Localização" />
+          <button type="submit">Confirmar</button>
         </form>
       )}
     </main>

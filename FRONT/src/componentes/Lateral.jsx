@@ -31,12 +31,12 @@ export function Lateral({ onSelecionarSecao }) {
 
         <div className={styles.botao} onClick={() => onSelecionarSecao("ambiente")}>
           <FaEnvira className={styles.icone} />
-          Ambiente
+          Reserva
         </div>
 
         <div className={styles.botao} onClick={() => onSelecionarSecao("agendamento")}>
           <FaCalendarAlt className={styles.icone} />
-          Agendamento
+          Sala
         </div>
       </section>
     </aside>
