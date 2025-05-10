@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api_smart'
+    'api_smart',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -74,7 +77,7 @@ DATABASES = {
         "NAME": "bancozinho",
         "USER": "root",
         "PASSWORD": "1234",
-        "HOST": "localhost",
+        'HOST': '127.0.0.1',
         "PORT": "3306",
     }
 }
@@ -125,16 +128,21 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    ],
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 JWT_AUTH = {
-    'JWT_SECRET_KEY': 'sua_chave_secreta_aqui',
+    'JWT_SECRET_KEY': 'aaa',
     'JWT_ALGORITHM': 'HS256',
     'JWT_EXPIRATION_DELTA': timedelta(days=1),
 }
