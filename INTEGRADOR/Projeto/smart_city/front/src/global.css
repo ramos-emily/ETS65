@@ -1,0 +1,25 @@
+:root {
+    --rosa: #a50281;
+    --rosa-sombra: #370327;
+    --rosa-shock: #ff00be;
+    --rosa-claro: #a604b9;
+    --azul: #031aa6;
+    --azul-sombra: #000;
+    --azul-shock: #58e6fa;
+    --azul-claro: #1218c6;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+body, input, textarea, button {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+ }
+

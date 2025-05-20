@@ -1,0 +1,10 @@
+.conteiner {
+    background-color: var(--cinza-escuro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto {
+    color: var(--azul-claro);
+}
