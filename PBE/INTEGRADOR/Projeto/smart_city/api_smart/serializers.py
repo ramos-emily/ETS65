@@ -4,12 +4,12 @@ from .models import Sensor, Historico, Ambientes
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ['id', 'sensor_id', 'mac_address', 'unidade_med', 'valor', 'latitude', 'longitude']
-
+        fields = ['id', 'sensor_id', 'mac_address', 'unidade_med', 'valor', 'latitude', 'longitude', 'status']
+        
 class HistoricoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Historico
-        fields = ['id', 'sensor', 'ambientes', 'observacoes']
+        fields = ['id', 'sensor', 'ambiente', 'observacoes']
 
 class AmbientesSerializer(serializers.ModelSerializer):
     class Meta:

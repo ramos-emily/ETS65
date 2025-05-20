@@ -5,7 +5,8 @@ from .views import (
     HistoricoListCreateAPIView,
     HistoricoDetailAPIView,
     AmbientesListCreateAPIView,
-    AmbientesDetailAPIView
+    AmbientesDetailAPIView,
+    exportar_sensores_excel    
 )
 
 
@@ -15,5 +16,6 @@ urlpatterns = [
     path('historicos/', HistoricoListCreateAPIView.as_view(), name='historico-list-create'), 
     path('historicos/<int:pk>/', HistoricoDetailAPIView.as_view(), name='historico-detail'),  
     path('ambientes/', AmbientesListCreateAPIView.as_view(), name='ambientes-list-create'),  
-    path('ambientes/<int:pk>/', AmbientesDetailAPIView.as_view(), name='ambientes-detail')
+    path('ambientes/<int:pk>/', AmbientesDetailAPIView.as_view(), name='ambientes-detail'),
+    path('exportar-sensores/', exportar_sensores_excel, name='exportar-sensores'),
 ]
