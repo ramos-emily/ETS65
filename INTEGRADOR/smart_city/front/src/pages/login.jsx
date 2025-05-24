@@ -27,16 +27,10 @@ export function Login() {
         <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
             <div className="w-full max-w-md space-y-8">
                 <div className="flex justify-center">
-                    <img 
-                        src={banner} 
-                        alt="Banner" 
-                        className="w-100 h-auto object-contain"
-                    />
+                    <img src={banner} alt="Banner" className="w-100 h-auto object-contain"/>
                 </div>
-
                 <div className="text-center space-y-8">
                     <h1 className="text-2xl text-gray-800 mb-6">Login</h1>
-
                     <div className="flex flex-col gap-8">
                         <div>
                             <input
@@ -48,7 +42,6 @@ export function Login() {
                                 placeholder="Usuario"
                             />
                         </div>
-
                         <div>
                             <input
                                 id="senha"
@@ -59,7 +52,6 @@ export function Login() {
                                 placeholder="Senha"
                             />
                         </div>
-
                         <div className="flex justify-center">
                             <button
                                 className="w-1/2 py-3 px-4 rounded-md text-lg font-medium text-white hover:bg-blue-700 transition-colors"
@@ -70,15 +62,10 @@ export function Login() {
                             </button>
                         </div>
                     </div>
-
-                    <div className="mt-10 text-center"> 
+                    <div className="mt-10 text-center">
                         <p className="text-gray-600">
                             Não tem uma conta? {' '}
-                            <Link 
-                                to="/cadastro" 
-                                className="font-semibold hover:underline"
-                                style={{ color: '#003376' }}
-                            >
+                            <Link to="/cadastro" className="font-semibold hover:underline" style={{ color: '#003376' }}>
                                 FAÇA CADASTRO AQUI
                             </Link>
                         </p>

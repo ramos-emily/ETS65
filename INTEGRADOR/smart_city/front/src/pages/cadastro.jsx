@@ -19,8 +19,11 @@ export function Cadastro() {
             alert("Cadastro realizado com sucesso! Faça login para continuar.");
             navigate('/');
         } catch (error) {
-            console.error("Erro ao cadastrar:", error);
-            alert("Erro ao realizar cadastro. Tente novamente.");
+            if (error.response && error.response.data.error) {
+                alert(error.response.data.error);
+            } else {
+                alert("Erro ao realizar cadastro. Tente novamente.");
+            }
         }
     };
 
@@ -28,16 +31,10 @@ export function Cadastro() {
         <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
             <div className="w-full max-w-md space-y-8">
                 <div className="flex justify-center">
-                    <img 
-                        src={banner} 
-                        alt="Banner" 
-                        className="w-100 h-auto object-contain"
-                    />
+                    <img src={banner} alt="Banner" className="w-100 h-auto object-contain"/>
                 </div>
-
                 <div className="text-center space-y-8">
                     <h1 className="text-2xl text-gray-800 mb-6">Cadastro</h1>
-
                     <div className="flex flex-col gap-8">
                         <div>
                             <input
@@ -49,7 +46,6 @@ export function Cadastro() {
                                 placeholder="Usuário"
                             />
                         </div>
-
                         <div>
                             <input
                                 id="email"
@@ -60,7 +56,6 @@ export function Cadastro() {
                                 placeholder="E-mail"
                             />
                         </div>
-
                         <div>
                             <input
                                 id="senha"
@@ -71,7 +66,6 @@ export function Cadastro() {
                                 placeholder="Senha"
                             />
                         </div>
-
                         <div className="flex justify-center">
                             <button
                                 className="w-1/2 py-3 px-4 rounded-md text-lg font-medium text-white hover:bg-blue-700 transition-colors"
@@ -82,15 +76,10 @@ export function Cadastro() {
                             </button>
                         </div>
                     </div>
-
-                    <div className="mt-10 text-center"> 
+                    <div className="mt-10 text-center">
                         <p className="text-gray-600">
                             Já tem uma conta? {' '}
-                            <Link 
-                                to="/" 
-                                className="font-semibold hover:underline"
-                                style={{ color: '#003376' }}
-                            >
+                            <Link to="/" className="font-semibold hover:underline" style={{ color: '#003376' }}>
                                 FAÇA LOGIN AQUI
                             </Link>
                         </p>

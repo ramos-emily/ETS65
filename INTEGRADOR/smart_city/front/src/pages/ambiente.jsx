@@ -26,7 +26,7 @@ export function Ambiente() {
         const fetchData = async () => {
             console.log("token", token);
             try {
-                const response = await axios.get("http://127.0.0.1:8000/api/ambientes", {
+                const response = await axios.get("http://127.0.0.1:8000/ambientes/", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setDados(response.data);

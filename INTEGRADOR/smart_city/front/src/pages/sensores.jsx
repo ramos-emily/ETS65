@@ -10,7 +10,6 @@ import filter from "../assets/filter.svg"
 import search from "../assets/search.svg"
 
 export function Sensores() {
-
     const [dados, setDados] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [modalAdd, setModalAdd] = useState(false);
@@ -25,11 +24,10 @@ export function Sensores() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8000/api/sensores", {
+                const response = await axios.get("http://127.0.0.1:8000/sensores/", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setDados(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
             }
@@ -38,31 +36,41 @@ export function Sensores() {
     }, [token]);
 
     const sensoresFiltrados = dados.filter((sensor) =>
-        sensor.sensor.toLowerCase().includes(searchTerm.toLowerCase())
+        sensor.sensor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        sensor.mac_address.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const getDisplayName = (sensorType) => {
+        switch(sensorType) {
+            case 'contador':
+                return 'Contador de Pessoas';
+            case 'temperatura':
+                return 'Sensor de Temperatura';
+            case 'umidade':
+                return 'Sensor de Umidade';
+            case 'luminosidade':
+                return 'Sensor de Luminosidade';
+            default:
+                return sensorType;
+        }
+    };
 
     return (
         <div className="flex flex-col items-center justify-center bg-[#faf9f9]">
-
-            {/* Inicio - Gráfico de Quantidade de Cadastros */}
+            {/* Gráfico de Quantidade de Cadastros */}
             <div className="z-10 flex items-center justify-center !mt-5 !mb-4 w-[81%] sm:w-[86%] lg:w-[97%] xl:w-[1160px] 2xl:w-[1255px] sm:!pl-40">
                 <GraficoQnt total={dados.length} max={2000} title="Sensores Cadastrados" />
             </div>
-            {/* -- Fim -- */}
 
-            {/* Inicio - Barra de criação, filtro e pesquisa de dado */}
+            {/* Barra de criação, filtro e pesquisa */}
             <div className="flex items-center justify-between w-[81%] sm:w-[60%] md:w-[65%] lg:w-[81%] xl:w-[1000px] 2xl:w-[1100px] !mb-5 sm:!ml-39">
-
                 <div className="flex gap-3">
-
-                    <img src={add} alt="Ícone para criar novo Sensores"
+                    <img src={add} alt="Ícone para criar novo Sensor"
                         className="bg-white shadow-md rounded !p-1 lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
                         onClick={() => setModalAdd(true)} />
-
                     <img src={filter} alt="Ícone para filtrar Sensores"
                         className="bg-white shadow-md rounded !p-1 lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
                         onClick={() => setModalFilter(true)} />
-
                 </div>
 
                 <div className="flex items-center bg-white shadow-md rounded w-[67%] sm:w-[60%] lg:w-[65%] h-12 lg:h-14">
@@ -72,35 +80,30 @@ export function Sensores() {
                         value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
-
             </div>
-            {/* -- Fim -- */}
 
+            {/* Grid de Sensores */}
             <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full sm:!pl-40 lg:!pl-42">
+                <ModalAdd isOpen={modalAdd} onClose={() => setModalAdd(false)} titulo="Sensores" url="sensores" campos={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]} />
+                <ModalFilter isOpen={modalFilter} onClose={() => setModalFilter(false)} url="sensores" campos={["id", "sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]} />
 
-                <ModalAdd isOpen={modalAdd} onClose={() => setModalAdd(false)} titulo="Sensores" url="sensores" campos={["sensor", "mac_address", "unidade_med", "latitude", "longitude", "status"]} />
-                <ModalFilter isOpen={modalFilter} onClose={() => setModalFilter(false)} url="sensores" campos={["id", "sensor", "mac_address", "unidade_med", "latitude", "longitude", "status"]} />
-
-                {/* Inicio - Renderização dos dados */}
-                {sensoresFiltrados.map((sensores) => (
+                {sensoresFiltrados.map((sensor) => (
                     <div
-                        key={sensores.id}
+                        key={sensor.id}
                         className="flex justify-between items-center bg-white shadow-md rounded !p-3 w-[80%] md:w-[83%] lg:w-[95%] hover:shadow-lg transition-all"
                     >
                         <div>
-                            <p className="text-sm text-gray-500">{sensores.sensor}</p>
-                            <p className="text-lg font-semibold text-gray-800">#{sensores.mac_address}</p>
+                            <p className="text-sm text-gray-500">{getDisplayName(sensor.sensor)}</p>
+                            <p className="text-lg font-semibold text-gray-800">#{sensor.mac_address}</p>
                         </div>
 
                         <img src={menu} alt="Menu"
-                            onClick={() => { setSensorSelecionado(sensores); setModalDeleteEdit(true); }}
+                            onClick={() => { setSensorSelecionado(sensor); setModalDeleteEdit(true); }}
                             className="cursor-pointer w-[35px] h-auto" />
-
                     </div>
                 ))}
-                {/* -- Fim -- */}
 
-                <ModalEditDel isOpen={modalDeleteEdit} onClose={() => setModalDeleteEdit(false)} url="sens" dados={sensorSelecionado} camposUpdate={["sensor", "mac_address", "unidade_med", "latitude", "longitude", "status"]} />
+                <ModalEditDel isOpen={modalDeleteEdit} onClose={() => setModalDeleteEdit(false)} url="sensores" dados={sensorSelecionado} camposUpdate={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]} />
             </div>
         </div>
     );
