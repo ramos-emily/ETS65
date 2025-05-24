@@ -10,7 +10,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         caminho_base = os.path.join(os.getcwd(), 'api_smart', 'management', 'commands')
 
-        # Importar Ambientes
         caminho_ambientes = os.path.join(caminho_base, 'Ambientes.xlsx')
         if os.path.exists(caminho_ambientes):
             dados_ambientes = pd.read_excel(caminho_ambientes)
@@ -29,7 +28,6 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.ERROR(f'Arquivo Ambientes.xlsx não encontrado em {caminho_base}'))
 
-        # Função para importar sensores
         def importar_sensores(nome_arquivo, tipo_sensor):
             caminho = os.path.join(caminho_base, nome_arquivo)
             if os.path.exists(caminho):
@@ -61,13 +59,11 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
 
-        # Chamada para importar sensores
         importar_sensores('umidade.xlsx', 'umidade')
         importar_sensores('temperatura.xlsx', 'temperatura')
         importar_sensores('luminosidade.xlsx', 'luminosidade')
         importar_sensores('contador.xlsx', 'contador')
 
-        # Função para importar histórico
         def importar_historico(nome_arquivo):
             caminho = os.path.join(caminho_base, nome_arquivo)
             if os.path.exists(caminho):
@@ -96,7 +92,6 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
 
-        # **Chamada para importar histórico - aqui fora da função, dentro do handle**
         importar_historico('historico.xlsx')
 
         self.stdout.write(self.style.SUCCESS('Importação concluída!'))
