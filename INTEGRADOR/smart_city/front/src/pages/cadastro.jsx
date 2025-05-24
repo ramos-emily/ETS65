@@ -1,76 +1,102 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
-import imgCadastro from "../assets/imgCadastro.jpg"
+import { Link, useNavigate } from 'react-router-dom';
+import banner from '../assets/banner.png';
 
 export function Cadastro() {
-
+    const [user, setUser] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        senha: ''
-    });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const cadastrar = async () => {
+        try {
+            await axios.post('http://127.0.0.1:8000/api/register/', {
+                username: user,
+                email: email,
+                password: password
+            });
+            alert("Cadastro realizado com sucesso! Faça login para continuar.");
+            navigate('/');
+        } catch (error) {
+            console.error("Erro ao cadastrar:", error);
+            alert("Erro ao realizar cadastro. Tente novamente.");
+        }
     };
 
-    const cadastrar = async (e) => {
-        e.preventDefault();
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
+            <div className="w-full max-w-md space-y-8">
+                <div className="flex justify-center">
+                    <img 
+                        src={banner} 
+                        alt="Banner" 
+                        className="w-100 h-auto object-contain"
+                    />
+                </div>
 
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/api/cadastro/', {
-                username: formData.username,
-                email: formData.email,
-                password: formData.senha
-            });
+                <div className="text-center space-y-8">
+                    <h1 className="text-2xl text-gray-800 mb-6">Cadastro</h1>
 
-            localStorage.setItem('token', response.data.access);
-            localStorage.setItem('refresh', response.data.refresh);
-            console.log(response.data.access);
-            alert("Usuário cadastrado com sucesso!");
-            navigate('/home');
-        }catch (error) {
-                console.error("Erro ao cadastrar usuário:", error);
-                if (error.response?.data) {
-                    console.log("Detalhes do erro:", error.response.data);
-                    alert("Erro ao cadastrar: " + JSON.stringify(error.response.data));
-                } else {
-                    alert("Erro ao cadastrar. Tente novamente.");
-                }
-            }
-
-        };
-
-        return (
-            <div className="flex flex-col items-center justify-center bg-[#faf9f9] h-[100vh] w-full">
-                <p className="text-4xl font-bold text-[#3473BA] !mb-10">Smart City</p>
-
-
-                <form onSubmit={cadastrar} className="flex flex-col items-center justify-start h-110 w-[80%] lg:w-[87%] 2xl:w-[70%] lg:h-120 shadow-lg xl:h-150 bg-white lg:flex-row">
-
-                    <div>
-                        <img src={imgCadastro} alt="Imagem ilustrativa de uma cidade futurista" className='h-0 w-0 lg:w-auto lg:h-120 xl:h-150' />
-                    </div>
-                    <div className='flex flex-col items-center justify-center sm:w-[71%]'>
-
-                        <h1 className='font-medium text-[26px] !mt-7'>Cadastro de Usuário</h1>
-
-                        <div className='flex flex-col items-center justify-cente'>
-                            <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Digite o nome de usuário" className='w-[300px] md:w-[450px] xl:w-[500px] xl:!p-2 !p-1.5 !mt-8 border-2 border-gray-300' required />
-
-                            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Digite seu e-mail" className='w-[300px] md:w-[450px] xl:w-[500px] xl:!p-2 !p-1.5 !mt-4 border-2 border-gray-300' required />
-
-                            <input type="password" name="senha" value={formData.senha} onChange={handleChange} placeholder="Digite a senha" className='w-[300px] md:w-[450px] xl:w-[500px] xl:!p-2 !p-1.5 !mt-4 border-2 border-gray-300' required />
-
+                    <div className="flex flex-col gap-8">
+                        <div>
+                            <input
+                                id="usuario"
+                                type="text"
+                                className="w-full px-4 py-4 bg-[#E5E5E5] border-b-2 border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-700 text-lg"
+                                value={user}
+                                onChange={(e) => setUser(e.target.value)}
+                                placeholder="Usuário"
+                            />
                         </div>
 
-                        <button className='w-[100px] !p-1 !mt-5 bg-[#007bc0] text-white text-[18px] font-medium' type="submit">Cadastrar</button>
-                        <h4 className='!mt-3 text-[17px] font-medium'>Já possui uma Conta? <Link to="/" className='text-[#007bc0]'>Fazer Login</Link></h4>
+                        <div>
+                            <input
+                                id="email"
+                                type="email"
+                                className="w-full px-4 py-4 bg-[#E5E5E5] border-b-2 border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-700 text-lg"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="E-mail"
+                            />
+                        </div>
+
+                        <div>
+                            <input
+                                id="senha"
+                                type="password"
+                                className="w-full px-4 py-4 bg-[#E5E5E5] border-b-2 border-gray-300 focus:outline-none focus:border-blue-600 placeholder-gray-700 text-lg"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Senha"
+                            />
+                        </div>
+
+                        <div className="flex justify-center">
+                            <button
+                                className="w-1/2 py-3 px-4 rounded-md text-lg font-medium text-white hover:bg-blue-700 transition-colors"
+                                style={{ backgroundColor: '#003376' }}
+                                onClick={cadastrar}
+                            >
+                                Cadastrar
+                            </button>
+                        </div>
                     </div>
-                </form>
+
+                    <div className="mt-10 text-center"> 
+                        <p className="text-gray-600">
+                            Já tem uma conta? {' '}
+                            <Link 
+                                to="/" 
+                                className="font-semibold hover:underline"
+                                style={{ color: '#003376' }}
+                            >
+                                FAÇA LOGIN AQUI
+                            </Link>
+                        </p>
+                    </div>
+                </div>
             </div>
-        );
-    }
+        </div>
+    );
+}

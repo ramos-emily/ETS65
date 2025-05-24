@@ -25,17 +25,17 @@ export function Login() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
-            <div className="w-full max-w-md">
+            <div className="w-full max-w-md space-y-8">
                 <div className="flex justify-center">
                     <img 
                         src={banner} 
                         alt="Banner" 
-                        className="w-72 h-auto object-contain"
+                        className="w-100 h-auto object-contain"
                     />
                 </div>
 
-                <div>
-                    <h1 className="text-2xl text-gray-800 text-center">Login</h1>
+                <div className="text-center space-y-8">
+                    <h1 className="text-2xl text-gray-800 mb-6">Login</h1>
 
                     <div className="flex flex-col gap-8">
                         <div>
@@ -60,16 +60,18 @@ export function Login() {
                             />
                         </div>
 
-                        <button
-                            className="w-full py-4 px-6 rounded-md text-lg font-medium text-white hover:bg-blue-700 transition-colors mt-4"
-                            style={{ backgroundColor: '#003376' }}
-                            onClick={logar}
-                        >
-                            Entrar
-                        </button>
+                        <div className="flex justify-center">
+                            <button
+                                className="w-1/2 py-3 px-4 rounded-md text-lg font-medium text-white hover:bg-blue-700 transition-colors"
+                                style={{ backgroundColor: '#003376' }}
+                                onClick={logar}
+                            >
+                                Entrar
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="mt-16 text-center">
+                    <div className="mt-10 text-center"> 
                         <p className="text-gray-600">
                             Não tem uma conta? {' '}
                             <Link 
