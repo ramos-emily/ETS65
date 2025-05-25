@@ -35,7 +35,7 @@ export function ModalAdd({ isOpen, onClose, titulo, url, campos = []}) {
         }
 
         try {
-            await axios.post(`http://127.0.0.1:8000/api/${url}`, formData, {
+            await axios.post(`http://127.0.0.1:8000/${url}`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

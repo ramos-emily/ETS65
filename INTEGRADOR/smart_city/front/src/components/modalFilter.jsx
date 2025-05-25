@@ -13,7 +13,7 @@ export function ModalFilter({ isOpen, onClose, url, campos = [] }) {
         if (!valorFiltro.trim()) return;
 
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/${url}/search/`, {
+            const response = await axios.get(`http://127.0.0.1:8000/${url}/search/`, {
                 headers: { Authorization: `Bearer ${token}` },
                 params: { search: valorFiltro.trim() },
             });

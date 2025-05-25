@@ -21,7 +21,7 @@ export function ModalEditDel({ isOpen, onClose, url, camposUpdate = [], dados, r
             for (const campo in relacoes) {
                 const { url: relUrl } = relacoes[campo];
                 try {
-                    const res = await axios.get(`http://127.0.0.1:8000/api/${relUrl}`, {
+                    const res = await axios.get(`http://127.0.0.1:8000/${relUrl}`, {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     novasOpcoes[campo] = res.data;
@@ -44,7 +44,7 @@ export function ModalEditDel({ isOpen, onClose, url, camposUpdate = [], dados, r
 
     const handleUpdate = async () => {
         try {
-            await axios.put(`http://127.0.0.1:8000/api/${url}/${dados.id}`, formData, {
+            await axios.put(`http://127.0.0.1:8000/${url}/${dados.id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -61,7 +61,7 @@ export function ModalEditDel({ isOpen, onClose, url, camposUpdate = [], dados, r
         if (!window.confirm("Tem certeza que deseja excluir?")) return;
 
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/${url}/${dados.id}`, {
+            await axios.delete(`http://127.0.0.1:8000/${url}/${dados.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
