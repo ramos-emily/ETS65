@@ -31,10 +31,6 @@ class Sensor(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ativo')
     timestamp = models.DateTimeField()
 
-    @property
-    def display_name(self):
-        return f"Contador de Pessoas\n#{self.mac_address}"
-
 class Historico(models.Model):
     sensor = models.ForeignKey(Sensor, related_name='historicos', on_delete=models.CASCADE)
     ambiente = models.ForeignKey(Ambientes, related_name='historicos', on_delete=models.CASCADE)

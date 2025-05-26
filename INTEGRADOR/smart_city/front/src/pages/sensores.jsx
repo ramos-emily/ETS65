@@ -57,12 +57,10 @@ export function Sensores() {
 
     return (
         <div className="flex flex-col items-center justify-center bg-[#faf9f9]">
-            {/* Gráfico de Quantidade de Cadastros */}
             <div className="z-10 flex items-center justify-center !mt-5 !mb-4 w-[81%] sm:w-[86%] lg:w-[97%] xl:w-[1160px] 2xl:w-[1255px] sm:!pl-40">
                 <GraficoQnt total={dados.length} max={2000} title="Sensores Cadastrados" />
             </div>
 
-            {/* Barra de criação, filtro e pesquisa */}
             <div className="flex items-center justify-between w-[81%] sm:w-[60%] md:w-[65%] lg:w-[81%] xl:w-[1000px] 2xl:w-[1100px] !mb-5 sm:!ml-39">
                 <div className="flex gap-3">
                     <img src={add} alt="Ícone para criar novo Sensor"
@@ -82,10 +80,20 @@ export function Sensores() {
                 </div>
             </div>
 
-            {/* Grid de Sensores */}
             <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full sm:!pl-40 lg:!pl-42">
-                <ModalAdd isOpen={modalAdd} onClose={() => setModalAdd(false)} titulo="Sensores" url="sensores" campos={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]} />
-                <ModalFilter isOpen={modalFilter} onClose={() => setModalFilter(false)} url="sensores" campos={["id", "sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]} />
+                <ModalAdd
+                    isOpen={modalAdd}
+                    onClose={() => setModalAdd(false)}
+                    titulo="Sensores"
+                    url="sensores"
+                    campos={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                />
+                <ModalFilter
+                    isOpen={modalFilter}
+                    onClose={() => setModalFilter(false)}
+                    url="sensores"
+                    campos={["id", "sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                />
 
                 {sensoresFiltrados.map((sensor) => (
                     <div
@@ -103,7 +111,13 @@ export function Sensores() {
                     </div>
                 ))}
 
-                <ModalEditDel isOpen={modalDeleteEdit} onClose={() => setModalDeleteEdit(false)} url="sensores" dados={sensorSelecionado} camposUpdate={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]} />
+                <ModalEditDel
+                    isOpen={modalDeleteEdit}
+                    onClose={() => setModalDeleteEdit(false)}
+                    url="sensores"
+                    dados={sensorSelecionado}
+                    camposUpdate={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                />
             </div>
         </div>
     );

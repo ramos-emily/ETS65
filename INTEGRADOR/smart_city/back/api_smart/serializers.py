@@ -2,15 +2,15 @@ from rest_framework import serializers
 from .models import Sensor, Historico, Ambientes
 
 class SensorSerializer(serializers.ModelSerializer):
-    display_name = serializers.SerializerMethodField()
-    
     class Meta:
         model = Sensor
         fields = '__all__'
-        
-    def get_display_name(self, obj):
-        return f"Contador de Pessoas\n#{obj.mac_address}"
-        
+
+    def __init__(self, *args, **kwargs):
+        super(SensorSerializer, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.required = False
+
 class HistoricoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Historico

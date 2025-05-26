@@ -38,8 +38,28 @@ export function ModalEditDel({ isOpen, onClose, url, camposUpdate = [], dados, r
     }, [dados]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, type } = e.target;
+
+        let val = value;
+
+        if (name === "timestamp") {
+            // Convert datetime-local input (local) to ISO string
+            val = value ? new Date(value).toISOString() : "";
+        } else if (name === "valor") {
+            // valor é numérico
+            val = value === "" ? "" : Number(value);
+        }
+
+        setFormData({ ...formData, [name]: val });
+    };
+
+    // Para o campo timestamp, converter ISO para datetime-local formato (yyyy-MM-ddTHH:mm)
+    const formatDateTimeLocal = (isoString) => {
+        if (!isoString) return "";
+        const dt = new Date(isoString);
+        const offset = dt.getTimezoneOffset();
+        const localDate = new Date(dt.getTime() - offset * 60000);
+        return localDate.toISOString().slice(0, 16);
     };
 
     const handleUpdate = async () => {
@@ -82,13 +102,32 @@ export function ModalEditDel({ isOpen, onClose, url, camposUpdate = [], dados, r
                 {camposUpdate.map((campo) => (
                     <div key={campo} className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">{campo}</label>
-                        <input
-                            type="text"
-                            name={campo}
-                            value={formData[campo] || ""}
-                            onChange={handleChange}
-                            className="w-full !p-2 !mb-2 border border-gray-300 rounded-md"
-                        />
+                        {campo === "timestamp" ? (
+                            <input
+                                type="datetime-local"
+                                name={campo}
+                                value={formatDateTimeLocal(formData[campo])}
+                                onChange={handleChange}
+                                className="w-full !p-2 !mb-2 border border-gray-300 rounded-md"
+                            />
+                        ) : campo === "valor" ? (
+                            <input
+                                type="number"
+                                step="any"
+                                name={campo}
+                                value={formData[campo] || ""}
+                                onChange={handleChange}
+                                className="w-full !p-2 !mb-2 border border-gray-300 rounded-md"
+                            />
+                        ) : (
+                            <input
+                                type="text"
+                                name={campo}
+                                value={formData[campo] || ""}
+                                onChange={handleChange}
+                                className="w-full !p-2 !mb-2 border border-gray-300 rounded-md"
+                            />
+                        )}
                     </div>
                 ))}
 
