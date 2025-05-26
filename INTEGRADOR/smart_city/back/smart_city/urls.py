@@ -7,9 +7,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="API de Gestão de Professores",
+        title="SMART CITY",
         default_version='v1',
-        description="Documentação da API para gerenciamento de professores, disciplinas e reservas de ambiente.",
+        description="Documentação da API da smart city.",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contato@exemplo.com"),
         license=openapi.License(name="MIT License"),
