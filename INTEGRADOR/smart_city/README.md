@@ -12,7 +12,8 @@ Desenvolver um back-end com Django Rest Framework para gerenciar e expor dados d
 ✅ Importação de dados de planilhas (.xlsx) para o banco<br>
 ✅ Exportação de dados em planilhas<br>
 ✅ Autenticação JWT<br>
-✅ Simulação de dados para testes
+✅ Simulação de dados para testes<br>
+✅ Documentação da API com Swagger
 
 📂 Estrutura de Pastas
 bash
@@ -53,10 +54,51 @@ smart_city/
 ├── env/                              # Ambiente virtual Python
 └── README.md                         # Este arquivo
 💾 Banco de Dados
-O projeto utiliza o MySQL como banco de dados, gerenciado via MySQL Workbench. As configurações de conexão estão definidas no arquivo settings.py do Django, utilizando as variáveis de ambiente para maior segurança e flexibilidade.
+O projeto utiliza o MySQL como banco de dados, gerenciado via MySQL Workbench. As configurações de conexão estão definidas no arquivo settings.py do Django, utilizando variáveis de ambiente para maior segurança e flexibilidade.
 
 🔐 Autenticação
 A autenticação é feita através de JSON Web Tokens (JWT). Para acessar os endpoints protegidos, é necessário incluir o token no cabeçalho das requisições.
+
+📑 Documentação da API (Swagger)
+A API está documentada utilizando o Swagger, que facilita a visualização e teste dos endpoints.
+
+✅ Acesse o Swagger em:
+
+arduino
+Copiar
+Editar
+http://127.0.0.1:8000/swagger/
+✅ Para autenticar e testar os endpoints protegidos:
+
+1️⃣ No Swagger, procure pela rota:
+
+bash
+Copiar
+Editar
+POST /api/token/
+2️⃣ Clique nela e insira as credenciais de login do superusuário (username e senha).
+
+3️⃣ Após a requisição bem-sucedida, copie o valor de "access" que aparece na resposta.
+
+4️⃣ Vá para o topo da página do Swagger e clique em:
+
+nginx
+Copiar
+Editar
+Authorize
+5️⃣ No campo de autorização, escreva:
+
+php-template
+Copiar
+Editar
+Bearer <chaveDeAcesso>
+Exemplo:
+
+nginx
+Copiar
+Editar
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+6️⃣ Agora, você poderá testar todos os CRUDs e endpoints que exigem autenticação diretamente pelo Swagger.
 
 📦 Como executar o projeto
 1️⃣ Clone o repositório:
@@ -103,7 +145,7 @@ Editar
 cd back
 python manage.py makemigrations
 python manage.py migrate
-6️⃣ Crie um superusuário (conforme instruções):
+6️⃣ Crie um superusuário:
 
 bash
 Copiar
@@ -116,7 +158,7 @@ python manage.py createsuperuser
 bash
 Copiar
 Editar
-python manage.py import_xlsx  # Ou o comando customizado específico
+python manage.py import_xlsx
 8️⃣ Inicie o servidor:
 
 bash
@@ -159,6 +201,8 @@ Implementação dos endpoints da API (CRUD)
 
 Implementação de autenticação JWT
 
+Documentação com Swagger (incluindo exigência de token)
+
 Scripts para importação de dados das planilhas
 
 Integração com front-end React para exibir e gerenciar os dados dos sensores
@@ -172,3 +216,14 @@ Para o login do superusuário, utilize seu primeiro nome (sem acento) e o númer
 Os dados dos sensores são simulados durante a fase de testes.
 
 O banco de dados utilizado é o MySQL via Workbench, configurado para suportar múltiplos usuários e facilitar a manutenção.
+
+
+
+
+
+
+
+
+
+
+
