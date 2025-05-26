@@ -1,6 +1,4 @@
 mapa e grafico
-swagger
-
 
 SUPERUSER:
 
