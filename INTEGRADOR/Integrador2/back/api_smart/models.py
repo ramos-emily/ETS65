@@ -23,13 +23,11 @@ class Sensor(models.Model):
     ]
 
     sensor = models.CharField(max_length=50, choices=SENSOR_CHOICES)  
-    mac_address = models.CharField(max_length=100, unique=True)
+    mac_address = models.CharField(max_length=100)
     unidade_medida = models.CharField(max_length=100)
-    valor = models.CharField(max_length=100)
     latitude = models.FloatField()
     longitude = models.FloatField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ativo')
-    timestamp = models.DateTimeField()
 
 class Historico(models.Model):
     sensor = models.ForeignKey(Sensor, related_name='historicos', on_delete=models.CASCADE)

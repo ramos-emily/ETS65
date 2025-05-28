@@ -36,28 +36,22 @@ class Command(BaseCommand):
                 for _, linha in dados.iterrows():
                     endereco_mac = linha['mac_address']
                     unidade = linha['unidade_medida']
-                    valor = str(linha['valor'])
                     latitude = float(linha['latitude'])
                     longitude = float(linha['longitude'])
                     status = linha.get('status', 'ativo')
-                    timestamp = linha['timestamp']
 
-                    sensor, criado = Sensor.objects.update_or_create(
+                    Sensor.objects.create(
                         mac_address=endereco_mac,
-                        defaults={
-                            'sensor': tipo_sensor,
-                            'unidade_medida': unidade,
-                            'valor': valor,
-                            'latitude': latitude,
-                            'longitude': longitude,
-                            'status': status,
-                            'timestamp': timestamp,
-                        }
+                        sensor=tipo_sensor,
+                        unidade_medida=unidade,
+                        latitude=latitude,
+                        longitude=longitude,
+                        status=status
                     )
-                    acao = "Criado" if criado else "Atualizado"
-                    self.stdout.write(f'{acao} Sensor: {endereco_mac} ({tipo_sensor})')
+                    self.stdout.write(f'Criado Sensor: {endereco_mac} ({tipo_sensor})')
             else:
                 self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
+
 
         importar_sensores('umidade.xlsx', 'umidade')
         importar_sensores('temperatura.xlsx', 'temperatura')
