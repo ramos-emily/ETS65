@@ -1,11 +1,12 @@
 import os
 import pandas as pd
 from django.core.management.base import BaseCommand
-from api_smart.models import Ambientes, Sensor
+from api_smart.models import Ambientes, Sensor, Historico
+from datetime import datetime
 
 class Command(BaseCommand):
-    help = 'Importa dados dos arquivos Excel para Ambientes e Sensores'
-
+    help = 'Importa dados dos arquivos Excel para Ambientes, Sensores e Histórico'
+    
     def handle(self, *args, **kwargs):
         caminho_base = os.path.join(os.getcwd(), 'api_smart', 'management', 'commands')
 
@@ -62,5 +63,35 @@ class Command(BaseCommand):
         importar_sensores('temperatura.xlsx', 'temperatura')
         importar_sensores('luminosidade.xlsx', 'luminosidade')
         importar_sensores('contador.xlsx', 'contador')
+
+        def importar_historico(nome_arquivo):
+            caminho = os.path.join(caminho_base, nome_arquivo)
+            if os.path.exists(caminho):
+                dados = pd.read_excel(caminho)
+                self.stdout.write(f'Importando histórico - {len(dados)} registros...')
+                for _, linha in dados.iterrows():
+                    try:
+                        sensor_id = int(linha['sensor'])
+                        ambiente_id = int(linha['ambiente'])
+                        valor = str(linha['valor'])
+                        timestamp = pd.to_datetime(linha['timestamp'], dayfirst=True)
+
+                        sensor = Sensor.objects.get(id=sensor_id)
+                        ambiente = Ambientes.objects.get(id=ambiente_id)
+
+                        Historico.objects.create(
+                            sensor=sensor,
+                            ambiente=ambiente,
+                            valor=valor,
+                            timestamp=timestamp,
+                            observacoes=''
+                        )
+                        self.stdout.write(f'Histórico criado: Sensor {sensor_id}, Ambiente {ambiente_id}')
+                    except Exception as e:
+                        self.stdout.write(self.style.ERROR(f"Erro: {e}"))
+            else:
+                self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
+
+        importar_historico('historico.xlsx')
 
         self.stdout.write(self.style.SUCCESS('Importação concluída!'))

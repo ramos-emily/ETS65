@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 
 class Ambientes(models.Model):
     sig = models.CharField(max_length=100, unique=True)
@@ -32,13 +31,12 @@ class Sensor(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ativo')
     timestamp = models.DateTimeField()
 
-    def __str__(self):
-        return f"{self.sensor}"
-
 class Historico(models.Model):
     sensor = models.ForeignKey(Sensor, related_name='historicos', on_delete=models.CASCADE)
     ambiente = models.ForeignKey(Ambientes, related_name='historicos', on_delete=models.CASCADE)
-    observacoes = models.TextField(blank=True)
+    valor = models.CharField(max_length=100, default='0') 
+    timestamp = models.DateTimeField()
+    observacoes = models.TextField(blank=True, default='')
 
     def __str__(self):
-        return f"Histórico do Sensor {self.sensor} em {self.ambiente.descricao}"
+        return f"{self.sensor} - {self.timestamp}"

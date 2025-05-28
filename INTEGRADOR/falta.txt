@@ -1,0 +1,2 @@
+crud -> historico
+mapa e grafico
