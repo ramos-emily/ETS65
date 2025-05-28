@@ -1,2 +1,6 @@
-crud -> historico
 mapa e grafico
+
+SUPERUSER:
+
+emily
+24240155
