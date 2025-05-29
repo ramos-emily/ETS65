@@ -29,6 +29,9 @@ class Sensor(models.Model):
     longitude = models.FloatField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ativo')
 
+    def __str__(self):
+        return self.sensor
+
 class Historico(models.Model):
     sensor = models.ForeignKey(Sensor, related_name='historicos', on_delete=models.CASCADE)
     ambiente = models.ForeignKey(Ambientes, related_name='historicos', on_delete=models.CASCADE)
