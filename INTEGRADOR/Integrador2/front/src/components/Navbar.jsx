@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
-import React from "react";
-
+import React, { useState } from "react";
 import home from "../assets/home.svg";
 import history from "../assets/history.svg";
 import location from "../assets/location.svg";
 import logout from "../assets/logout.svg";
 import sensors from "../assets/sensors.svg";
+import search from "../assets/search.svg"
+
+
 
 export function Navbar() {
+
+  const [searchTerm, setSearchTerm] = useState("");
+  
   let linkNav = [
     {
       img: home,
@@ -33,14 +38,25 @@ export function Navbar() {
       altImg: "Icone para localizar a página de Histórico",
       titulo: "Histórico"
     }
+    
   ];
 
   return (
     <nav className="text-[#226D13] bg-white shadow-bottom w-full fixed top-0 z-10 h-20">
-  <div className="container mx-auto flex items-center h-full px-8">
-    {/* Título alinhado à esquerda (não muda) */}
+    <div className="container mx-auto flex items-center h-full px-8">
+      {/* Título alinhado à esquerda (não muda) */}
     <div className="text-2xl font-bold mr-auto">Smart City</div> {/* mr-auto empurra o resto para a direita */}
-    
+    <div className="flex items-center bg-white shadow-md rounded w-[67%] sm:w-[60%] lg:w-[65%] h-12 lg:h-14 ">
+        <img src={search} alt="Ícone da barra de pesquisa" className="w-5 h-5 !ml-5" />
+        <input
+            type="text" 
+            placeholder="Buscar..." 
+            className="!ml-2 w-full outline-none text-sm "
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
+    </div>
+        
     {/* Conteúdo alinhado à direita */}
     <div className="flex justify-end flex-1"> {/* flex-1 + justify-end alinha tudo à direita */}
       <ul className="flex gap-6 items-center h-full">

@@ -64,17 +64,6 @@ export function Ambiente() {
                         onClick={() => setModalFilter(true)} 
                     />
                 </div>
-
-                <div className="flex items-center bg-white shadow-md rounded w-[67%] sm:w-[60%] lg:w-[65%] h-12 lg:h-14 ">
-                    <img src={search} alt="Ícone da barra de pesquisa" className="w-5 h-5 !ml-5" />
-                    <input
-                        type="text" 
-                        placeholder="Buscar..." 
-                        className="!ml-2 w-full outline-none text-sm "
-                        value={searchTerm} 
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
             </div>
 
             {/* Grid de ambientes - Centralizado com largura máxima */}
