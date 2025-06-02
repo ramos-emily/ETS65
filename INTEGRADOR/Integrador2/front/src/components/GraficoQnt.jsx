@@ -5,14 +5,14 @@ export function GraficoQnt({ total, max, title }) {
   const offset = 100 - percentage;
 
   return (
-    <div className="flex items-center justify-between bg-white text-[#3473BA] !p-4 w-full h-30 rounded shadow-md">
+    <div className="flex items-center justify-between bg-white text-[#226D13] !p-4 w-full h-30 rounded shadow-md">
       <div>
         <div className="text-3xl font-bold">{percentage}%</div>
         <div className="text-sm opacity-75">{title}</div>
       </div>
       <svg className="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
         <circle
-          className="text-[#3473BA] opacity-20"
+          className="text-[#226D13] opacity-20"
           stroke="currentColor"
           strokeWidth="3"
           fill="transparent"
@@ -21,7 +21,7 @@ export function GraficoQnt({ total, max, title }) {
           cy="18"
         />
         <circle
-          className="text-[#3473BA]"
+          className="text-[#226D13]"
           stroke="currentColor"
           strokeWidth="3"
           strokeDasharray="100"

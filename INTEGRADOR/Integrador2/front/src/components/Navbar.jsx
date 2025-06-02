@@ -36,7 +36,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="text-[#3473BA] bg-white shadow-bottom w-full fixed top-0 z-10 h-20">
+    <nav className="text-[#226D13] bg-white shadow-bottom w-full fixed top-0 z-10 h-20">
   <div className="container mx-auto flex items-center h-full px-8">
     {/* Título alinhado à esquerda (não muda) */}
     <div className="text-2xl font-bold mr-auto">Smart City</div> {/* mr-auto empurra o resto para a direita */}

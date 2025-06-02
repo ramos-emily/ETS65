@@ -16,9 +16,6 @@ Desenvolver um back-end com Django Rest Framework para gerenciar e expor dados d
 ✅ Documentação da API com Swagger
 
 📂 Estrutura de Pastas
-bash
-Copiar
-Editar
 smart_city/
 ├── back/
 │   ├── api_smart/
@@ -64,17 +61,11 @@ A API está documentada utilizando o Swagger, que facilita a visualização e te
 
 ✅ Acesse o Swagger em:
 
-arduino
-Copiar
-Editar
 http://127.0.0.1:8000/swagger/
 ✅ Para autenticar e testar os endpoints protegidos:
 
 1️⃣ No Swagger, procure pela rota:
 
-bash
-Copiar
-Editar
 POST /api/token/
 2️⃣ Clique nela e insira as credenciais de login do superusuário (username e senha).
 
@@ -82,51 +73,32 @@ POST /api/token/
 
 4️⃣ Vá para o topo da página do Swagger e clique em:
 
-nginx
-Copiar
-Editar
 Authorize
 5️⃣ No campo de autorização, escreva:
 
 php-template
-Copiar
-Editar
 Bearer <chaveDeAcesso>
 Exemplo:
 
-nginx
-Copiar
-Editar
 Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 6️⃣ Agora, você poderá testar todos os CRUDs e endpoints que exigem autenticação diretamente pelo Swagger.
 
 📦 Como executar o projeto
 1️⃣ Clone o repositório:
 
-bash
-Copiar
-Editar
 git clone <URL-do-repositório>
 cd smart_city
 2️⃣ Crie e ative o ambiente virtual:
 
-bash
-Copiar
-Editar
 python -m venv env
 source env/bin/activate  # Linux/Mac
 env\Scripts\activate     # Windows
 3️⃣ Instale as dependências:
 
-bash
-Copiar
-Editar
 pip install -r back/requirements.txt
 4️⃣ Configure o banco de dados MySQL no arquivo back/smart_city/settings.py:
 
 python
-Copiar
-Editar
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -139,37 +111,22 @@ DATABASES = {
 }
 5️⃣ Rode as migrações do banco de dados:
 
-bash
-Copiar
-Editar
 cd back
 python manage.py makemigrations
 python manage.py migrate
 6️⃣ Crie um superusuário:
 
-bash
-Copiar
-Editar
 python manage.py createsuperuser
 # username = <seu primeiro nome, sem acentuação>
 # password = <seu número de matrícula no senai>
 7️⃣ Importe os dados das planilhas (opcional):
 
-bash
-Copiar
-Editar
 python manage.py import_xlsx
 8️⃣ Inicie o servidor:
 
-bash
-Copiar
-Editar
 python manage.py runserver
 9️⃣ Acesse o front-end React no diretório front e rode:
 
-bash
-Copiar
-Editar
 cd front
 npm install
 npm run dev
