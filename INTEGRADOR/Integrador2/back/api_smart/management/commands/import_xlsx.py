@@ -5,8 +5,8 @@ from api_smart.models import Ambientes, Sensor, Historico
 from datetime import datetime
 
 class Command(BaseCommand):
-    help = 'Importa dados dos arquivos Excel para Ambientes, Sensores e Histórico'
     
+    #função que define o caminho base dos dados excel
     def handle(self, *args, **kwargs):
         caminho_base = os.path.join(os.getcwd(), 'api_smart', 'management', 'commands')
 
@@ -14,6 +14,8 @@ class Command(BaseCommand):
         if os.path.exists(caminho_ambientes):
             dados_ambientes = pd.read_excel(caminho_ambientes)
             self.stdout.write(f'Importando Ambientes - {len(dados_ambientes)} registros...')
+            
+            # Itera sobre as linhas do arquivo e cria ou atualiza os registros no banco
             for _, linha in dados_ambientes.iterrows():
                 ambiente, criado = Ambientes.objects.update_or_create(
                     sig=linha['sig'],
@@ -28,6 +30,7 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.ERROR(f'Arquivo Ambientes.xlsx não encontrado em {caminho_base}'))
 
+        #Importa sensores da planilha por categoria
         def importar_sensores(nome_arquivo, tipo_sensor):
             caminho = os.path.join(caminho_base, nome_arquivo)
             if os.path.exists(caminho):
@@ -52,7 +55,7 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
 
-
+        #Importa sensores da planilha por tipo
         importar_sensores('umidade.xlsx', 'umidade')
         importar_sensores('temperatura.xlsx', 'temperatura')
         importar_sensores('luminosidade.xlsx', 'luminosidade')
