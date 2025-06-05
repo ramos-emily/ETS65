@@ -14,7 +14,7 @@ class SensorSerializer(serializers.ModelSerializer):
 class HistoricoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Historico
-        fields = ['id', 'sensor', 'ambiente', 'valor', 'timestamp', 'observacoes']
+        fields = ['id', 'sensor_id', 'ambiente_id', 'valor', 'timestamp']
 
 class AmbientesSerializer(serializers.ModelSerializer):
     class Meta:

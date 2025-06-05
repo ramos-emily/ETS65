@@ -4,10 +4,10 @@ import { ModalAdd } from "../components/modalAdd";
 import { ModalEditDel } from "../components/modalEditDel";
 import { ModalFilter } from "../components/modalFilter";
 import { GraficoQnt } from "../components/graficoQnt";
-import menu from "../assets/settings.svg"
-import add from "../assets/add.svg"
-import filter from "../assets/filter.svg"
-import search from "../assets/search.svg"
+import menu from "../assets/settings.svg";
+import add from "../assets/add.svg";
+import filter from "../assets/filter.svg";
+import search from "../assets/search.svg";
 
 export function Sensores() {
     const [dados, setDados] = useState([]);
@@ -55,75 +55,86 @@ export function Sensores() {
         }
     };
 
-return (
-    <div className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
-        {/* Gráfico - Removido padding esquerdo e ajustado width */}
-        <div className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
-            <GraficoQnt total={dados.length} max={2000} title="Sensores Cadastrados" />
-        </div>
+    return (
+        <div className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
+            {/* Gráfico - Removido padding esquerdo e ajustado width */}
+            <header className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
+                <GraficoQnt total={dados.length} max={2000} title="Sensores Cadastrados" />
+            </header>
 
-        {/* Barra de ações - Centralizada com width limitado */}
-        <div className="flex items-center justify-between w-full max-w-[1100px] !mb-5">
-            <div className="flex gap-3">
-                <img 
-                    src={add} 
-                    alt="Ícone para criar novo Sensor"
-                    className="bg-white shadow-md rounded !p-1 lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
-                    onClick={() => setModalAdd(true)} 
-                />
-                <img 
-                    src={filter} 
-                    alt="Ícone para filtrar Sensores"
-                    className="bg-white shadow-md rounded !p-1 lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
-                    onClick={() => setModalFilter(true)} 
-                />
-            </div>
-
-        </div>
-
-        {/* Grid de sensores - Removido padding esquerdo */}
-        <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
-            <ModalAdd
-                isOpen={modalAdd}
-                onClose={() => setModalAdd(false)}
-                titulo="Sensores"
-                url="sensores"
-                campos={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
-            />
-            <ModalFilter
-                isOpen={modalFilter}
-                onClose={() => setModalFilter(false)}
-                url="sensores"
-                campos={["id", "sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
-            />
-
-            {sensoresFiltrados.map((sensor) => (
-                <div
-                    key={sensor.id}
-                    className="flex justify-between items-center bg-white shadow-md rounded !p-3 w-full hover:shadow-lg transition-all"
-                >
-                    <div>
-                        <p className="text-sm text-[#226D13]">{getDisplayName(sensor.sensor)}</p>
-                        <p className="text-lg font-semibold text-[#226D13]">#{sensor.mac_address}</p>
-                    </div>
-
-                    <img 
-                        src={menu} 
-                        alt="Menu"
-                        onClick={() => { setSensorSelecionado(sensor); setModalDeleteEdit(true); }}
-                        className="cursor-pointer w-[35px] h-auto" 
-                    />
+            {/* Barra de ações - Centralizada com width limitado */}
+            <section className="flex items-center justify-center w-full max-w-[1100px] !mb-5">
+                <div className="flex gap-3">
+                    <button 
+                        onClick={() => setModalAdd(true)}
+                        className="bg-white shadow-md rounded lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
+                    >
+                        <img 
+                            src={add} 
+                            alt="Ícone para criar novo Sensor"
+                            className="w-6 h-6"
+                        />
+                    </button>
+                    <button
+                        onClick={() => setModalFilter(true)}
+                        className="bg-white shadow-md rounded lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
+                    >
+                        <img 
+                            src={filter} 
+                            alt="Ícone para filtrar Sensores"
+                            className="w-6 h-6"
+                        />
+                    </button>
                 </div>
-            ))}
+            </section>
 
-            <ModalEditDel
-                isOpen={modalDeleteEdit}
-                onClose={() => setModalDeleteEdit(false)}
-                url="sensores"
-                dados={sensorSelecionado}
-                camposUpdate={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
-            />
+            {/* Grid de sensores - Removido padding esquerdo */}
+            <section className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
+                <ModalAdd
+                    isOpen={modalAdd}
+                    onClose={() => setModalAdd(false)}
+                    titulo="Sensores"
+                    url="sensores"
+                    campos={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                />
+                <ModalFilter
+                    isOpen={modalFilter}
+                    onClose={() => setModalFilter(false)}
+                    url="sensores"
+                    campos={["id", "sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                />
+
+                {sensoresFiltrados.map((sensor) => (
+                    <article
+                        key={sensor.id}
+                        className="flex justify-between items-center bg-white shadow-md rounded !p-3 w-full hover:shadow-lg transition-all"
+                    >
+                        <div>
+                            <h2 className="text-sm text-[#226D13]">{getDisplayName(sensor.sensor)}</h2>
+                            <p className="text-lg font-semibold text-[#226D13]">#{sensor.mac_address}</p>
+                        </div>
+
+                        <button
+                            onClick={() => { setSensorSelecionado(sensor); setModalDeleteEdit(true); }}
+                            className="cursor-pointer"
+                        >
+                            <img 
+                                src={menu} 
+                                alt="Menu de opções do sensor"
+                                className="w-[35px] h-auto" 
+                            />
+                        </button>
+                    </article>
+                ))}
+
+                <ModalEditDel
+                    isOpen={modalDeleteEdit}
+                    onClose={() => setModalDeleteEdit(false)}
+                    url="sensores"
+                    dados={sensorSelecionado}
+                    camposUpdate={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                />
+            </section>
         </div>
-    </div>
-);
+    );
 }

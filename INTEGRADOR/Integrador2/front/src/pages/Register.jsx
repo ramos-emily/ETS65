@@ -28,15 +28,18 @@ export function Cadastro() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
-            <div className="w-full max-w-md space-y-8">
-                <div className="flex justify-center">
-                    <img src={banner} alt="Banner" className="w-100 h-auto object-contain"/>
-                </div>
-                <div className="text-center space-y-8">
-                    <h1 className="text-2xl text-gray-800 mb-6">Cadastro</h1>
-                    <div className="flex flex-col gap-8">
-                        <div>
+        <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
+            <section className="w-full max-w-md space-y-8">
+                <figure className="flex justify-center">
+                    <img src={banner} alt="Banner da aplicação" className="w-100 h-auto object-contain"/>
+                </figure>
+                <article className="text-center space-y-8">
+                    <header>
+                        <h1 className="text-2xl text-gray-800 mb-6">Cadastro</h1>
+                    </header>
+                    <form className="flex flex-col gap-8" onSubmit={(e) => { e.preventDefault(); cadastrar(); }}>
+                        <fieldset>
+                            <label htmlFor="usuario" className="sr-only">Usuário</label>
                             <input
                                 id="usuario"
                                 type="text"
@@ -44,9 +47,11 @@ export function Cadastro() {
                                 value={user}
                                 onChange={(e) => setUser(e.target.value)}
                                 placeholder="Usuário"
+                                required
                             />
-                        </div>
-                        <div>
+                        </fieldset>
+                        <fieldset>
+                            <label htmlFor="email" className="sr-only">E-mail</label>
                             <input
                                 id="email"
                                 type="email"
@@ -54,9 +59,11 @@ export function Cadastro() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="E-mail"
+                                required
                             />
-                        </div>
-                        <div>
+                        </fieldset>
+                        <fieldset>
+                            <label htmlFor="senha" className="sr-only">Senha</label>
                             <input
                                 id="senha"
                                 type="password"
@@ -64,28 +71,29 @@ export function Cadastro() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Senha"
+                                required
                             />
-                        </div>
-                        <div className="flex justify-center">
+                        </fieldset>
+                        <fieldset className="flex justify-center">
                             <button
+                                type="submit"
                                 className="w-1/2 py-3 px-4 rounded-md text-lg font-medium text-white hover:bg-blue-700 transition-colors"
                                 style={{ backgroundColor: '#003376' }}
-                                onClick={cadastrar}
                             >
                                 Cadastrar
                             </button>
-                        </div>
-                    </div>
-                    <div className="mt-10 text-center">
+                        </fieldset>
+                    </form>
+                    <footer className="mt-10 text-center">
                         <p className="text-gray-600">
                             Já tem uma conta? {' '}
                             <Link to="/" className="font-semibold hover:underline" style={{ color: '#003376' }}>
                                 FAÇA LOGIN AQUI
                             </Link>
                         </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </footer>
+                </article>
+            </section>
+        </main>
     );
 }

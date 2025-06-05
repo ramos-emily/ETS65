@@ -109,19 +109,23 @@ DATABASES = {
         'PORT': '3306',           # porta padrão do MySQL
     }
 }
-5️⃣ Rode as migrações do banco de dados:
+5️⃣   Importe os dados das planilhas:
 
-cd back
-python manage.py makemigrations
-python manage.py migrate
+python manage.py import_xlsx 
+
+
 6️⃣ Crie um superusuário:
 
 python manage.py createsuperuser
 # username = <seu primeiro nome, sem acentuação>
 # password = <seu número de matrícula no senai>
-7️⃣ Importe os dados das planilhas (opcional):
+7️⃣ Rode as migrações do banco de dados:
 
-python manage.py import_xlsx
+cd back
+
+python manage.py makemigrations
+python manage.py migrate
+
 8️⃣ Inicie o servidor:
 
 python manage.py runserver

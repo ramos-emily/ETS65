@@ -9,7 +9,6 @@ export function ModalFilter({ isOpen, onClose, url, campos = [], relacoes = {} }
     const [resultados, setResultados] = useState([]);
     const token = localStorage.getItem('token');
 
-    // Formata ISO para datetime-local (apenas para exibição no filtro e resultados)
     const formatDateTimeLocal = (isoString) => {
         if (!isoString) return "";
         const dt = new Date(isoString);
@@ -18,22 +17,16 @@ export function ModalFilter({ isOpen, onClose, url, campos = [], relacoes = {} }
         return localDate.toISOString().slice(0, 16);
     };
 
-    // Formata valores para exibir em resultados (trata timestamp e relações)
     const formatValue = (key, value) => {
         if (!value) return "";
-
         if (key === "timestamp") {
             return formatDateTimeLocal(value).replace("T", " ");
         }
-
         if (relacoes[key]) {
-            // Se for relação, tenta mostrar algo mais amigável (ex: nome)
             if (typeof value === "object" && value !== null) {
-                // Exemplo: value.nome ou value.id
                 return value.nome || value.id || JSON.stringify(value);
             }
         }
-
         return String(value);
     };
 
@@ -46,20 +39,21 @@ export function ModalFilter({ isOpen, onClose, url, campos = [], relacoes = {} }
                 params: { search: valorFiltro.trim() },
             });
 
+            const termoNumerico = Number(valorFiltro.trim());
+            const camposExatos = ["id", "sensor_id", "ambiente_id"];
+
             const filtrado = campoSelecionado
                 ? response.data.filter(item => {
                     let campoValor = item[campoSelecionado];
-
-                    // Se campo é timestamp, converte para string simples para comparar
                     if (campoSelecionado === "timestamp" && campoValor) {
                         campoValor = formatDateTimeLocal(campoValor);
                     }
-
-                    // Se campo é relação, extrai nome ou id
                     if (relacoes[campoSelecionado] && campoValor && typeof campoValor === "object") {
                         campoValor = campoValor.nome || campoValor.id || "";
                     }
-
+                    if (camposExatos.includes(campoSelecionado)) {
+                        return Number(campoValor) === termoNumerico;
+                    }
                     return String(campoValor ?? '')
                         .toLowerCase()
                         .includes(valorFiltro.toLowerCase());
@@ -71,6 +65,7 @@ export function ModalFilter({ isOpen, onClose, url, campos = [], relacoes = {} }
             console.error("Erro ao aplicar filtro:", error);
         }
     };
+
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500/30 z-50">

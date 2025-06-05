@@ -4,10 +4,10 @@ import { ModalAdd } from "../components/modalAdd";
 import { ModalEditDel } from "../components/modalEditDel";
 import { ModalFilter } from "../components/modalFilter";
 import { GraficoQnt } from "../components/graficoQnt";
-import menu from "../assets/settings.svg"
-import add from "../assets/add.svg"
-import filter from "../assets/filter.svg"
-import search from "../assets/search.svg"
+import menu from "../assets/settings.svg";
+import add from "../assets/add.svg";
+import filter from "../assets/filter.svg";
+import search from "../assets/search.svg";
 
 export function Ambiente() {
     const [dados, setDados] = useState([]);
@@ -42,32 +42,42 @@ export function Ambiente() {
     );
 
     return (
-        <div className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
+        <main className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
             {/* Gráfico - Centralizado com largura máxima */}
-            <div className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
+            <header className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
                 <GraficoQnt total={dados.length} max={200} title="Ambientes Cadastrados" />
-            </div>
+            </header>
 
-            {/* Barra de ações - Centralizada com largura máxima */}
-            <div className="flex items-center justify-between w-full max-w-[1100px] !mb-5">
+            {/* Barra de ações */}
+            <section className="flex items-center justify-center w-full max-w-[1100px] !mb-5">
                 <div className="flex gap-3">
-                    <img 
-                        src={add} 
-                        alt="Ícone para criar novo Ambiente"
-                        className="bg-white shadow-md rounded !p-1 lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
-                        onClick={() => setModalAdd(true)} 
-                    />
-                    <img 
-                        src={filter} 
-                        alt="Ícone para filtrar Ambiente"
-                        className="bg-white shadow-md rounded !p-1 lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
-                        onClick={() => setModalFilter(true)} 
-                    />
+                    <button
+                        onClick={() => setModalAdd(true)}
+                        className="bg-white shadow-md rounded lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
+                        aria-label="Criar novo ambiente"
+                    >
+                        <img 
+                            src={add} 
+                            alt=""
+                            className="w-6 h-6"
+                        />
+                    </button>
+                    <button
+                        onClick={() => setModalFilter(true)}
+                        className="bg-white shadow-md rounded lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
+                        aria-label="Filtrar ambientes"
+                    >
+                        <img 
+                            src={filter} 
+                            alt=""
+                            className="w-6 h-6"
+                        />
+                    </button>
                 </div>
-            </div>
+            </section>
 
             {/* Grid de ambientes - Centralizado com largura máxima */}
-            <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
+            <section className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
                 <ModalAdd 
                     isOpen={modalAdd} 
                     onClose={() => setModalAdd(false)} 
@@ -82,23 +92,28 @@ export function Ambiente() {
                     campos={["id", "sig", "ni", "responsavel"]} 
                 />
 
-                {ambientesFiltrados.map((ambientes) => (
-                    <div
-                        key={ambientes.id}
+                {ambientesFiltrados.map((ambiente) => (
+                    <article
+                        key={ambiente.id}
                         className="flex justify-between items-center bg-white shadow-md rounded !p-3 w-full hover:shadow-lg transition-all"
                     >
                         <div>
-                            <p className="text-sm text-[#226D13] ">SIG #{ambientes.sig}</p>
-                            <p className="text-lg font-semibold text-[#226D13]">{ambientes.descricao}</p>
+                            <h2 className="text-sm text-[#226D13]">SIG #{ambiente.sig}</h2>
+                            <p className="text-lg font-semibold text-[#226D13]">{ambiente.descricao}</p>
                         </div>
 
-                        <img 
-                            src={menu} 
-                            alt="Menu"
-                            onClick={() => { setAmbienteSelecionado(ambientes); setModalDeleteEdit(true); }}
-                            className="cursor-pointer w-[35px] h-auto" 
-                        />
-                    </div>
+                        <button
+                            onClick={() => { setAmbienteSelecionado(ambiente); setModalDeleteEdit(true); }}
+                            className="cursor-pointer"
+                            aria-label={`Opções do ambiente ${ambiente.sig}`}
+                        >
+                            <img 
+                                src={menu} 
+                                alt=""
+                                className="w-[35px] h-auto" 
+                            />
+                        </button>
+                    </article>
                 ))}
 
                 <ModalEditDel 
@@ -108,7 +123,7 @@ export function Ambiente() {
                     dados={ambienteSelecionado} 
                     camposUpdate={["sig", "descricao", "ni", "responsavel"]} 
                 />
-            </div>
-        </div>
+            </section>
+        </main>
     );
 }

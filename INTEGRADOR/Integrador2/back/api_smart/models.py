@@ -40,4 +40,4 @@ class Historico(models.Model):
     observacoes = models.TextField(blank=True, default='')
 
     def __str__(self):
-        return f"{self.sensor} - {self.timestamp}"
+        return f"{self.sensor}"
