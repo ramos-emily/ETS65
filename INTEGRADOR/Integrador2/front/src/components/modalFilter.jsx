@@ -66,13 +66,12 @@ export function ModalFilter({ isOpen, onClose, url, campos = [], relacoes = {} }
         }
     };
 
-
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500/30 z-50">
-            <div className="bg-white rounded-lg !p-6 w-[400px] sm:w-[510px] lg:w-[640px] xl:w-[800px] overflow-y-auto shadow-lg max-h-[80vh]">
-                <h2 className="text-xl font-bold !mb-2 text-gray-800">Filtro</h2>
+            <section className="bg-white rounded-lg !p-6 w-[400px] sm:w-[510px] lg:w-[640px] xl:w-[800px] overflow-y-auto shadow-lg max-h-[80vh]" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <h2 id="modal-title" className="text-xl font-bold !mb-2 text-gray-800">Filtro</h2>
 
-                <div className="!mb-4">
+                <form className="!mb-4" onSubmit={(e) => { e.preventDefault(); handleFiltrar(); }}>
                     <label htmlFor="campo-select" className="block !mb-1 text-sm font-medium text-gray-700">
                         Filtrar por:
                     </label>
@@ -89,36 +88,39 @@ export function ModalFilter({ isOpen, onClose, url, campos = [], relacoes = {} }
                             </option>
                         ))}
                     </select>
-                </div>
 
-                <input
-                    type="text"
-                    placeholder={`Buscar por ${campoSelecionado || "qualquer campo"}`}
-                    className="w-full outline-none text-sm shadow !p-2 !mb-3"
-                    value={valorFiltro}
-                    onChange={(e) => setValorFiltro(e.target.value)}
-                />
+                    <input
+                        type="text"
+                        placeholder={`Buscar por ${campoSelecionado || "qualquer campo"}`}
+                        className="w-full outline-none text-sm shadow !p-2 !mb-3"
+                        value={valorFiltro}
+                        onChange={(e) => setValorFiltro(e.target.value)}
+                        aria-label="Campo de busca"
+                    />
 
-                <div className="flex justify-end gap-2 mt-4">
-                    <button onClick={onClose} className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md !p-2">Cancelar</button>
-                    <button onClick={handleFiltrar} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md !p-2">Filtrar</button>
-                </div>
+                    <div className="flex justify-end gap-2 mt-4">
+                        <button type="button" onClick={onClose} className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md !p-2">Cancelar</button>
+                        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md !p-2">Filtrar</button>
+                    </div>
+                </form>
 
                 {resultados.length > 0 && (
-                    <div className="!mt-2">
-                        <h3 className="text-lg font-semibold !mb-2 text-gray-800">Resultados:</h3>
+                    <section className="!mt-2" aria-labelledby="resultados-titulo">
+                        <h3 id="resultados-titulo" className="text-lg font-semibold !mb-2 text-gray-800">Resultados:</h3>
                         <ul className="space-y-2 max-h-[300px] overflow-y-auto">
                             {resultados.map((item, index) => (
                                 <li key={index} className="!p-2 rounded text-sm bg-gray-50 shadow !mb-1.5">
-                                    {Object.entries(item).map(([key, value]) => (
-                                        <div key={key}><strong>{key}:</strong> {formatValue(key, value)}</div>
-                                    ))}
+                                    <article>
+                                        {Object.entries(item).map(([key, value]) => (
+                                            <p key={key}><strong>{key}:</strong> {formatValue(key, value)}</p>
+                                        ))}
+                                    </article>
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </section>
                 )}
-            </div>
+            </section>
         </div>
     );
 }

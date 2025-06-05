@@ -7,7 +7,6 @@ import logout from "../assets/logout.svg";
 import sensors from "../assets/sensors.svg";
 import search from "../assets/search.svg";
 
-
 export function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -39,51 +38,56 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="text-[#226D13] bg-white shadow-bottom w-full fixed top-0 z-10 h-20">
-      <div className="mx-auto flex items-center justify-center h-full gap-150">
-        <div className="flex items-center gap-4 ">
-          <div className="flex items-center shadow-md rounded w-100 h-10 ml-4 bg-[#faf9f9] gap-2">
+    <header className="text-[#226D13] bg-white shadow-bottom w-full fixed top-0 z-10 h-20">
+      <nav className="mx-auto flex items-center justify-center h-full gap-150" aria-label="Navegação principal">
+        <div className="flex items-center gap-4">
+          <form className="flex items-center shadow-md rounded w-100 h-10 ml-4 bg-[#faf9f9] gap-2" role="search">
             <img
               src={search}
               alt="Ícone de pesquisa"
-              className="w-4 h-4 ml-3 "
+              className="w-4 h-4 ml-3"
             />
             <input
               type="text"
               placeholder="Buscar..."
-              className="ml-2 w-full outline-none text-sm "
+              className="ml-2 w-full outline-none text-sm"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Campo de busca"
             />
-          </div>
+          </form>
         </div>
 
-        <ul className="flex gap-10 items-center">
+        <ul className="flex gap-10 items-center" role="list">
           {linkNav.map((navRender, index) => (
-            <Link key={index} to={navRender.link}>
-              <li className="flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all px-4 py-2 rounded-md cursor-pointer">
-                <img
-                  src={navRender.img}
-                  alt={navRender.altImg}
-                  className="w-6 h-6"
-                />
-                <p className="text-lg font-semibold">{navRender.titulo}</p>
-              </li>
-            </Link>
+            <li key={index} role="listitem">
+              <Link to={navRender.link}>
+                <div className="flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all px-4 py-2 rounded-md cursor-pointer">
+                  <img
+                    src={navRender.img}
+                    alt={navRender.altImg}
+                    className="w-6 h-6"
+                  />
+                  <p className="text-lg font-semibold">{navRender.titulo}</p>
+                </div>
+              </Link>
+            </li>
           ))}
 
-          <Link to="/" onClick={() => localStorage.removeItem("token")}>
-            <li className="flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all px-4 py-2 rounded-md cursor-pointer">
-              <img
-                src={logout}
-                alt="Ícone de sair"
-                className="w-6 h-6"
-              />
-              <p className="text-lg font-semibold">Sair</p>
-            </li>
-          </Link>
+          <li role="listitem">
+            <Link to="/" onClick={() => localStorage.removeItem("token")}>
+              <div className="flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all px-4 py-2 rounded-md cursor-pointer">
+                <img
+                  src={logout}
+                  alt="Ícone para sair do sistema"
+                  className="w-6 h-6"
+                />
+                <p className="text-lg font-semibold">Sair</p>
+              </div>
+            </Link>
+          </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }

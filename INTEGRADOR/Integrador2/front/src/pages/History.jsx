@@ -45,14 +45,15 @@ export function Historico() {
     );
 
     return (
-        <div className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
+        <main className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6" aria-label="Página de histórico de sensores">
             {/* Gráfico - Centralizado com largura máxima */}
             <header className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
                 <GraficoQnt total={dados.length} max={200} title="Históricos Cadastrados" />
             </header>
 
             {/* Barra de ações - Centralizada com largura máxima */}
-            <section className="flex items-center justify-center w-full max-w-[1100px] !mb-5">
+            <section aria-labelledby="acoes-header" className="flex items-center justify-center w-full max-w-[1100px] !mb-5">
+                <h2 id="acoes-header" className="sr-only">Ações disponíveis</h2>
                 <div className="flex gap-3">
                     <button
                         onClick={() => setModalAdd(true)}
@@ -61,18 +62,18 @@ export function Historico() {
                     >
                         <img 
                             src={add} 
-                            alt=""
+                            alt="Ícone de adição - Criar novo registro" 
                             className="w-6 h-6"
                         />
                     </button>
                     <button
                         onClick={() => setModalFilter(true)}
                         className="bg-white shadow-md rounded lg:!p-2 hover:shadow-lg transition-all cursor-pointer"
-                        aria-label="Filtrar históricos"
+                        aria-label="Abrir filtros de pesquisa"
                     >
                         <img 
                             src={filter} 
-                            alt=""
+                            alt="Ícone de filtro - Filtrar registros" 
                             className="w-6 h-6"
                         />
                     </button>
@@ -80,7 +81,9 @@ export function Historico() {
             </section>
             
             {/* Grid de históricos - Centralizado com largura máxima */}
-            <section className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
+            <section aria-labelledby="historicos-header" className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
+                <h2 id="historicos-header" className="sr-only">Lista de históricos registrados</h2>
+                
                 <ModalAdd
                     isOpen={modalAdd} 
                     onClose={() => setModalAdd(false)} 
@@ -88,6 +91,7 @@ export function Historico() {
                     url="historico" 
                     campos={["ambiente_id", "sensor_id", "timestamp", "valor"]} 
                 />
+                
                 <ModalFilter 
                     isOpen={modalFilter} 
                     onClose={() => setModalFilter(false)} 
@@ -99,20 +103,23 @@ export function Historico() {
                     <article
                         key={historico.id}
                         className="flex justify-between items-center bg-white shadow-md rounded !p-3 w-full hover:shadow-lg transition-all"
+                        aria-labelledby={`historico-${historico.id}-header`}
                     >
                         <div>
-                            <h2 className="text-sm text-[#226D13]">ID #{historico.id}</h2>
-                            <p className="text-lg font-semibold text-[#226D13]">{historico.valor}</p>
+                            <h3 id={`historico-${historico.id}-header`} className="text-sm text-[#226D13]">ID #{historico.id}</h3>
+                            <p className="text-lg font-semibold text-[#226D13]">Valor: {historico.valor}</p>
+                            <p className="sr-only">Sensor ID: {historico.sensor_id}, Ambiente ID: {historico.ambiente_id}, Timestamp: {historico.timestamp}</p>
                         </div>
 
                         <button
                             onClick={() => { setHistoricoSelecionado(historico); setModalDeleteEdit(true); }}
                             className="cursor-pointer"
-                            aria-label={`Opções do histórico ${historico.id}`}
+                            aria-label={`Opções para o histórico ID ${historico.id}`}
+                            aria-haspopup="dialog"
                         >
                             <img 
                                 src={menu} 
-                                alt=""
+                                alt="Ícone de menu - Abrir opções" 
                                 className="w-[35px] h-auto" 
                             />
                         </button>
@@ -127,6 +134,6 @@ export function Historico() {
                     camposUpdate={["ambiente_id", "sensor_id", "timestamp", "valor"]}
                 />
             </section>
-        </div>
+        </main>
     );
 }

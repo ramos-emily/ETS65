@@ -5,12 +5,24 @@ export function GraficoQnt({ total, max, title }) {
   const offset = 100 - percentage;
 
   return (
-    <div className="flex items-center justify-between bg-white text-[#226D13] !p-4 w-full h-30 rounded shadow-md">
+    <section
+      className="flex items-center justify-between bg-white text-[#226D13] !p-4 w-full h-30 rounded shadow-md"
+      aria-label={`Gráfico de progresso: ${title}`}
+    >
       <div>
-        <div className="text-3xl font-bold">{percentage}%</div>
-        <div className="text-sm opacity-75">{title}</div>
+        <p className="text-3xl font-bold" aria-label={`Progresso de ${percentage} por cento`}>
+          {percentage}%
+        </p>
+        <p className="text-sm opacity-75">{title}</p>
       </div>
-      <svg className="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+
+      <svg
+        className="w-12 h-12 transform -rotate-90"
+        viewBox="0 0 36 36"
+        role="img"
+        aria-label={`Gráfico circular mostrando ${percentage}% de conclusão`}
+      >
+        <title>{`Gráfico circular de ${percentage}%`}</title>
         <circle
           className="text-[#226D13] opacity-20"
           stroke="currentColor"
@@ -33,6 +45,6 @@ export function GraficoQnt({ total, max, title }) {
           style={{ transition: "stroke-dashoffset 0.5s ease" }}
         />
       </svg>
-    </div>
+    </section>
   );
 }

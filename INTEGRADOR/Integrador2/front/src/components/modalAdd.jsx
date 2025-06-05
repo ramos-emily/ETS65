@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export function ModalAdd({ isOpen, onClose, titulo, url, campos = []}) {
+export function ModalAdd({ isOpen, onClose, titulo, url, campos = [] }) {
     if (!isOpen) return null;
 
     const [formData, setFormData] = useState(() =>
@@ -11,7 +11,6 @@ export function ModalAdd({ isOpen, onClose, titulo, url, campos = []}) {
         }, {})
     );
 
-    const [opcoesFK, setOpcoesFK] = useState({});
     const token = localStorage.getItem('token');
 
     const handleChange = (e) => {
@@ -50,11 +49,21 @@ export function ModalAdd({ isOpen, onClose, titulo, url, campos = []}) {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500/30 z-50">
-            <div className="bg-white rounded-lg !p-6 lg:!p-8 w-[400px] sm:w-[510px] lg:w-[640px] xl:w-[800px] shadow-lg">
-                <h2 className="text-xl font-bold !mb-4 text-gray-800">Adicionar novo {titulo}</h2>
+        <div
+            className="fixed inset-0 flex items-center justify-center bg-gray-500/30 z-50"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-add-title"
+        >
+            <section className="bg-white rounded-lg !p-6 lg:!p-8 w-[400px] sm:w-[510px] lg:w-[640px] xl:w-[800px] shadow-lg">
+                <h2
+                    id="modal-add-title"
+                    className="text-xl font-bold !mb-4 text-gray-800"
+                >
+                    Adicionar novo {titulo}
+                </h2>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} aria-describedby="modal-add-title">
                     {campos.map((campo) => (
                         <div key={`campo-${campo}`} className="mb-4">
                             <label htmlFor={campo} className="block text-gray-700 capitalize">
@@ -62,9 +71,15 @@ export function ModalAdd({ isOpen, onClose, titulo, url, campos = []}) {
                             </label>
 
                             <input
-                                type={(campo === "latitude" || campo === "longitude" || campo === "sig" || campo === "valor") ? "number" : 
-                                    (campo === "timestamp") ? "date" : 
-                                    (campo === "status") ? "boolean" :"text"}
+                                type={
+                                    (campo === "latitude" || campo === "longitude" || campo === "sig" || campo === "valor")
+                                        ? "number"
+                                        : (campo === "timestamp")
+                                            ? "date"
+                                            : (campo === "status")
+                                                ? "text" // "boolean" não é tipo válido para input; usar "checkbox" se necessário
+                                                : "text"
+                                }
                                 id={campo}
                                 name={campo}
                                 placeholder={campo}
@@ -73,16 +88,26 @@ export function ModalAdd({ isOpen, onClose, titulo, url, campos = []}) {
                                 className="w-full !p-2 border border-gray-300 rounded-md !mb-2"
                                 required
                             />
-
                         </div>
                     ))}
 
                     <div className="flex justify-end gap-4">
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md !p-2">Salvar</button>
-                        <button type="button" onClick={onClose} className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md !p-2">Cancelar</button>
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md !p-2"
+                        >
+                            Salvar
+                        </button>
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md !p-2"
+                        >
+                            Cancelar
+                        </button>
                     </div>
                 </form>
-            </div>
+            </section>
         </div>
     );
 }
