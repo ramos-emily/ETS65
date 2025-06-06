@@ -5,6 +5,11 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { Footer } from './components/footer.jsx'
 
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

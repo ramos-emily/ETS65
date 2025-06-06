@@ -5,11 +5,12 @@ import { Login } from './pages/Login'
 import { Cadastro } from './pages/Register'
 
 import { Ambiente } from './pages/Environment'
-import { Home } from './pages/Map'
+import { Home } from './pages/Home'
 import { Sensores } from './pages/Sensor'
 import { Historico } from './pages/History'
 
 import './App.css'
+import 'leaflet/dist/leaflet.css'
 
 export default function App() {
   const location = useLocation()
