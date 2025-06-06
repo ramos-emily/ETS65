@@ -97,6 +97,7 @@ export function Historico() {
                     onClose={() => setModalFilter(false)} 
                     url="historico" 
                     campos={["id", "ambiente_id", "sensor_id", "timestamp", "valor"]} 
+                    setDados={setDados} 
                 />
 
                 {historicosFiltrados.map((historico) => (

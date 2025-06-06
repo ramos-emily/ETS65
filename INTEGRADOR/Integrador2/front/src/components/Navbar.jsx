@@ -35,6 +35,12 @@ export function Navbar() {
       altImg: "Ícone para localizar a página de Histórico",
       titulo: "Histórico",
     },
+        {
+      img: history,
+      link: "/map",
+      altImg: "Ícone para localizar a página de Mapa",
+      titulo: "Mapa",
+    },
   ];
 
   return (

@@ -76,7 +76,7 @@ export function Ambiente() {
                 </div>
             </section>
 
-            {/* Grid de ambientes - Centralizado com largura máxima */}
+            {/* Grid de ambientes */}
             <section className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
                 <ModalAdd 
                     isOpen={modalAdd} 
@@ -90,6 +90,7 @@ export function Ambiente() {
                     onClose={() => setModalFilter(false)} 
                     url="ambientes" 
                     campos={["id", "sig", "ni", "responsavel"]} 
+                    setDados={setDados} 
                 />
 
                 {ambientesFiltrados.map((ambiente) => (

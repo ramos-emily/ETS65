@@ -102,6 +102,7 @@ export function Sensores() {
                     onClose={() => setModalFilter(false)}
                     url="sensores"
                     campos={["id", "sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
+                    setDados={setDados} 
                 />
 
                 {sensoresFiltrados.map((sensor) => (
