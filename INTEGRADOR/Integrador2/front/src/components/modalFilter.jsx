@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Home } from "../pages/Home";
 
@@ -9,13 +9,14 @@ export function ModalFilter({
   campos = [],
   relacoes = {},
   onSensorSelect,
-  setDados, 
+  setDados,
 }) {
   if (!isOpen) return null;
 
   const [campoSelecionado, setCampoSelecionado] = useState("");
   const [valorFiltro, setValorFiltro] = useState("");
   const [resultados, setResultados] = useState([]);
+  const [filtrado, setFiltrado] = useState(false);
   const token = localStorage.getItem("token");
 
   const formatDateTimeLocal = (isoString) => {
@@ -24,7 +25,7 @@ export function ModalFilter({
     const offset = dt.getTimezoneOffset();
     const localDate = new Date(dt.getTime() - offset * 60000);
     return localDate.toISOString().slice(0, 16);
-  }
+  };
 
   const formatValue = (key, value) => {
     if (!value) return "";
@@ -74,6 +75,7 @@ export function ModalFilter({
         : response.data;
 
       setResultados(filtrado);
+      setFiltrado(true);
 
       if (setDados) {
         setDados(filtrado);
@@ -143,12 +145,15 @@ export function ModalFilter({
           </button>
         </div>
 
+        {filtrado && resultados.length > 0 && (
+          <section className="mt-6">
+            <h3 className="text-lg font-semibold mb-2 text-gray-800">Gráfico:</h3>
+            <Home dados={resultados} campoX="timestamp" campoY="valor" />
+          </section>
+        )}
+
         {resultados.length > 0 && (
-          <div className="!mt-2">
-              <section className="mt-6">
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">Gráfico:</h3>
-                <GraficoSensor dados={resultados} campoX="timestamp" campoY="valor" />
-              </section>
+          <>
             <h3 className="text-lg font-semibold !mb-2 text-gray-800">Resultados:</h3>
             <ul className="space-y-2 max-h-[300px] overflow-y-auto">
               {resultados.map((item, index) => (
@@ -165,7 +170,7 @@ export function ModalFilter({
                 </li>
               ))}
             </ul>
-          </div>
+          </>
         )}
       </div>
     </div>
