@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Home } from "../pages/Home";
 
 export function ModalFilter({
   isOpen,
@@ -144,6 +145,10 @@ export function ModalFilter({
 
         {resultados.length > 0 && (
           <div className="!mt-2">
+              <section className="mt-6">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">Gráfico:</h3>
+                <GraficoSensor dados={resultados} campoX="timestamp" campoY="valor" />
+              </section>
             <h3 className="text-lg font-semibold !mb-2 text-gray-800">Resultados:</h3>
             <ul className="space-y-2 max-h-[300px] overflow-y-auto">
               {resultados.map((item, index) => (
