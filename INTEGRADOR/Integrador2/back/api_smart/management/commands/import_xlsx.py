@@ -31,8 +31,8 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR(f'Arquivo Ambientes.xlsx não encontrado em {caminho_base}'))
 
         #Importa sensores da planilha por categoria
-        def importar_sensores(nome_arquivo, tipo_sensor):
-            caminho = os.path.join(caminho_base, nome_arquivo)
+        def importar_sensores(planilha, tipo_sensor):
+            caminho = os.path.join(caminho_base, planilha)
             if os.path.exists(caminho):
                 dados = pd.read_excel(caminho)
                 self.stdout.write(f'Importando sensores tipo {tipo_sensor} - {len(dados)} registros...')
@@ -53,7 +53,7 @@ class Command(BaseCommand):
                     )
                     self.stdout.write(f'Criado Sensor: {endereco_mac} ({tipo_sensor})')
             else:
-                self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
+                self.stdout.write(self.style.ERROR(f'Arquivo {planilha} não encontrado em {caminho_base}'))
 
         #Importa sensores da planilha por tipo
         importar_sensores('umidade.xlsx', 'umidade')
@@ -61,8 +61,8 @@ class Command(BaseCommand):
         importar_sensores('luminosidade.xlsx', 'luminosidade')
         importar_sensores('contador.xlsx', 'contador')
 
-        def importar_historico(nome_arquivo):
-            caminho = os.path.join(caminho_base, nome_arquivo)
+        def importar_historico(planilha):
+            caminho = os.path.join(caminho_base, planilha)
             if os.path.exists(caminho):
                 dados = pd.read_excel(caminho)
                 self.stdout.write(f'Importando histórico - {len(dados)} registros...')
@@ -87,7 +87,7 @@ class Command(BaseCommand):
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f"Erro: {e}"))
             else:
-                self.stdout.write(self.style.ERROR(f'Arquivo {nome_arquivo} não encontrado em {caminho_base}'))
+                self.stdout.write(self.style.ERROR(f'Arquivo {planilha} não encontrado em {caminho_base}'))
 
         importar_historico('historico.xlsx')
 

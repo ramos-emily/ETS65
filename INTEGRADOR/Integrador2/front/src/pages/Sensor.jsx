@@ -58,8 +58,42 @@ export function Sensores() {
     return (
         <div className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
             {/* Gráfico - Removido padding esquerdo e ajustado width */}
-            <header className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
+            <header className="z-10 flex items-center justify-between !mt-30 !mb-4 w-full max-w-[1160px]">
                 <GraficoQnt total={dados.length} max={2000} title="Sensores Cadastrados" />
+
+                <button
+                    onClick={async () => {
+                        try {
+                            const token = localStorage.getItem('token');
+                            const response = await fetch("http://127.0.0.1:8000/exportar-sensores/", {
+                                method: "GET",
+                                headers: {
+                                    Authorization: `Bearer ${token}`
+                                }
+                            });
+
+                            if (!response.ok) {
+                                throw new Error("Erro ao exportar dados.");
+                            }
+
+                            const blob = await response.blob();
+                            const url = window.URL.createObjectURL(blob);
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.setAttribute('download', 'sensores.xlsx');
+                            document.body.appendChild(link);
+                            link.click();
+                            link.remove();
+                            window.URL.revokeObjectURL(url);
+                        } catch (error) {
+                            console.error("Erro ao exportar Excel:", error);
+                            alert("Erro ao exportar Excel. Verifique sua autenticação.");
+                        }
+                    }}
+                    className="bg-white shadow-md rounded px-10 py-2 text-sm text-[#226D13] hover:shadow-lg transition-all"
+                >
+                    Exportar Excel
+                </button>
             </header>
 
             {/* Barra de ações - Centralizada com width limitado */}
