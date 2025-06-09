@@ -12,6 +12,7 @@ import {
   Filler
 } from "chart.js";
 import axios from "axios";
+import { ModalFilter } from "../components/modalFilter";
 
 ChartJS.register(
   LineElement,
@@ -29,13 +30,13 @@ export const Home = () => {
   const [sensorIdInput, setSensorIdInput] = useState("");
   const [sensorIdFiltro, setSensorIdFiltro] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const url = "historico";
 
   const fetchDados = () => {
     if (!sensorIdInput) return;
     setLoading(true);
     const token = localStorage.getItem("token");
-
     const filtro = `?sensor=${sensorIdInput}`;
 
     axios
@@ -63,8 +64,8 @@ export const Home = () => {
       {
         label: `Valor por Timestamp (Sensor ${sensorIdFiltro})`,
         data: valores,
-        borderColor: "rgb(75, 192, 192)",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgb(18, 85, 85)",
+        backgroundColor: "rgba(13, 54, 54, 0.2)",
         tension: 0.3,
         fill: true,
       },
@@ -73,6 +74,7 @@ export const Home = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: { display: true, text: "Gráfico de Leitura de Sensores" },
       legend: { position: "top" },
@@ -80,7 +82,7 @@ export const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-4 gap-6">
+    <div className="min-h-screen flex flex-col justify-center items-center p- gap-6">
       <h2 className="text-xl font-semibold mb-4 text-center">Dashboard</h2>
 
       <div className="flex gap-2">
@@ -100,8 +102,10 @@ export const Home = () => {
         </button>
       </div>
 
-      <div className="w-[500px]">
-        <Line data={data} options={options} />
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-[1200px] h-[400px]">
+          <Line data={data} options={options} />
+        </div>
       </div>
     </div>
   );
