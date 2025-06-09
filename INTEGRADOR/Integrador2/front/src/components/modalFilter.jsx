@@ -145,13 +145,6 @@ export function ModalFilter({
           </button>
         </div>
 
-        {filtrado && resultados.length > 0 && (
-          <section className="mt-6">
-            <h3 className="text-lg font-semibold mb-2 text-gray-800">Gráfico:</h3>
-            <Home dados={resultados} campoX="timestamp" campoY="valor" />
-          </section>
-        )}
-
         {resultados.length > 0 && (
           <>
             <h3 className="text-lg font-semibold !mb-2 text-gray-800">Resultados:</h3>
