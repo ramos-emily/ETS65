@@ -10,6 +10,7 @@ import filter from "../assets/filter.svg";
 import search from "../assets/search.svg";
 
 export function Sensores() {
+    // Estados principais para dados, controle de modais, filtro e seleção de sensor
     const [dados, setDados] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [modalAdd, setModalAdd] = useState(false);
@@ -17,8 +18,9 @@ export function Sensores() {
     const [modalDeleteEdit, setModalDeleteEdit] = useState(false);
     const [sensorSelecionado, setSensorSelecionado] = useState(null);
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token'); // Token para autenticação
 
+    // Efeito para buscar dados dos sensores ao montar o componente e quando o token muda
     useEffect(() => {
         if (!token) return;
 
@@ -35,11 +37,13 @@ export function Sensores() {
         fetchData();
     }, [token]);
 
+    // Filtra os sensores de acordo com o termo de busca nos campos sensor e mac_address
     const sensoresFiltrados = dados.filter((sensor) =>
         sensor.sensor.toLowerCase().includes(searchTerm.toLowerCase()) ||
         sensor.mac_address.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // Função para exibir nome amigável do tipo do sensor
     const getDisplayName = (sensorType) => {
         switch(sensorType) {
             case 'contador':
@@ -57,10 +61,12 @@ export function Sensores() {
 
     return (
         <div className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6">
-            {/* Gráfico - Removido padding esquerdo e ajustado width */}
+
+            {/* Cabeçalho com gráfico e botão de exportar Excel */}
             <header className="z-10 flex items-center justify-between !mt-30 !mb-4 w-full max-w-[1160px]">
                 <GraficoQnt total={dados.length} max={2000} title="Sensores Cadastrados" />
 
+                {/* Botão para exportar os dados dos sensores em Excel */}
                 <button
                     onClick={async () => {
                         try {
@@ -96,7 +102,7 @@ export function Sensores() {
                 </button>
             </header>
 
-            {/* Barra de ações - Centralizada com width limitado */}
+            {/* Barra de ações com botões para adicionar e filtrar sensores */}
             <section className="flex items-center justify-center w-full max-w-[1100px] !mb-5">
                 <div className="flex gap-3">
                     <button 
@@ -122,8 +128,9 @@ export function Sensores() {
                 </div>
             </section>
 
-            {/* Grid de sensores - Removido padding esquerdo */}
+            {/* Grid de sensores exibidos na tela, com opções de editar/excluir */}
             <section className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]">
+                {/* Modal para adicionar sensor */}
                 <ModalAdd
                     isOpen={modalAdd}
                     onClose={() => setModalAdd(false)}
@@ -131,6 +138,7 @@ export function Sensores() {
                     url="sensores"
                     campos={["sensor", "mac_address", "unidade_medida", "latitude", "longitude", "status"]}
                 />
+                {/* Modal para filtro avançado */}
                 <ModalFilter
                     isOpen={modalFilter}
                     onClose={() => setModalFilter(false)}
@@ -139,6 +147,7 @@ export function Sensores() {
                     setDados={setDados} 
                 />
 
+                {/* Lista os sensores filtrados com botão para abrir menu de edição/exclusão */}
                 {sensoresFiltrados.map((sensor) => (
                     <article
                         key={sensor.id}
@@ -162,6 +171,7 @@ export function Sensores() {
                     </article>
                 ))}
 
+                {/* Modal para editar ou deletar sensor selecionado */}
                 <ModalEditDel
                     isOpen={modalDeleteEdit}
                     onClose={() => setModalDeleteEdit(false)}

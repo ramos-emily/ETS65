@@ -9,6 +9,8 @@ import add from "../assets/add.svg";
 import filter from "../assets/filter.svg";
 
 export function Historico() {
+  // ----------- Estados do componente -----------
+  // Armazena os dados dos históricos, texto para busca e estados dos modais
   const [dados, setDados] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [modalAdd, setModalAdd] = useState(false);
@@ -16,8 +18,12 @@ export function Historico() {
   const [modalDeleteEdit, setModalDeleteEdit] = useState(false);
   const [historicoSelecionado, setHistoricoSelecionado] = useState(null);
 
+  // ----------- Token de autenticação -----------
+  // Pega o token salvo no localStorage para usar nas requisições autenticadas
   const token = localStorage.getItem("token");
 
+  // ----------- Efeito para carregar dados da API -----------
+  // Ao montar o componente ou quando o token mudar, busca os históricos da API
   useEffect(() => {
     if (!token) return;
 
@@ -35,6 +41,8 @@ export function Historico() {
     fetchData();
   }, [token]);
 
+  // ----------- Filtragem dos históricos com base no texto digitado -----------
+  // Aqui faço um filtro nos dados para mostrar só os históricos que batem com o texto
   const historicosFiltrados = dados.filter(
     (historico) =>
       String(historico.valor).toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -44,15 +52,23 @@ export function Historico() {
       String(historico.timestamp).toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // ----------- JSX: Estrutura visual da página -----------
+  // Contém:
+  // - Cabeçalho com gráfico mostrando quantidade total de históricos
+  // - Barra com botões para abrir modais de adicionar e filtrar
+  // - Grid listando os históricos filtrados com botão para abrir modal de editar/deletar
+  // - Inclusão dos modais para add, filter e edit/delete
   return (
     <main
       className="flex flex-col items-center bg-[#faf9f9] min-h-screen w-full px-4 sm:px-6"
       aria-label="Página de histórico de sensores"
     >
+      {/* Cabeçalho com gráfico */}
       <header className="z-10 flex items-center justify-center !mt-30 !mb-4 w-full max-w-[1160px]">
         <GraficoQnt total={dados.length} max={200} title="Históricos Cadastrados" />
       </header>
 
+      {/* Barra de ações */}
       <section
         aria-labelledby="acoes-header"
         className="flex items-center justify-center w-full max-w-[1100px] !mb-5"
@@ -78,6 +94,7 @@ export function Historico() {
         </div>
       </section>
 
+      {/* Grid de históricos */}
       <section
         aria-labelledby="historicos-header"
         className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-3 w-full max-w-[1100px]"
@@ -86,6 +103,7 @@ export function Historico() {
           Lista de históricos registrados
         </h2>
 
+        {/* Modal para adicionar histórico */}
         <ModalAdd
           isOpen={modalAdd}
           onClose={() => setModalAdd(false)}
@@ -94,6 +112,7 @@ export function Historico() {
           campos={["ambiente_id", "sensor_id", "timestamp", "valor"]}
         />
 
+        {/* Modal para filtrar históricos */}
         <ModalFilter
           isOpen={modalFilter}
           onClose={() => setModalFilter(false)}
@@ -102,6 +121,7 @@ export function Historico() {
           setDados={setDados}
         />
 
+        {/* Lista dos históricos filtrados */}
         {historicosFiltrados.map((historico) => (
           <article
             key={historico.id}
@@ -119,6 +139,7 @@ export function Historico() {
               </p>
             </div>
 
+            {/* Botão para abrir modal de editar/deletar */}
             <button
               onClick={() => {
                 setHistoricoSelecionado(historico);
@@ -133,6 +154,7 @@ export function Historico() {
           </article>
         ))}
 
+        {/* Modal para editar/deletar histórico selecionado */}
         <ModalEditDel
           isOpen={modalDeleteEdit}
           onClose={() => setModalDeleteEdit(false)}

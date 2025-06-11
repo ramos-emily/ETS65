@@ -4,11 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import banner from '../assets/banner.png';
 
 export function Cadastro() {
+    /*
+    Eu crio os estados para guardar os valores que o usuário digita nos campos de usuário, email e senha.
+    Também uso a função para navegar entre páginas após o cadastro.
+    */
     const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    /*
+    Essa função é responsável por enviar os dados para a API e tentar cadastrar o usuário.
+    Se o cadastro for bem-sucedido, eu aviso o usuário e redireciono para a página de login.
+    Se ocorrer algum erro, eu exibo uma mensagem apropriada.
+    */
     const cadastrar = async () => {
         try {
             await axios.post('http://127.0.0.1:8000/api/register/', {
@@ -27,9 +36,15 @@ export function Cadastro() {
         }
     };
 
+    /*
+    Essa é a parte visual do componente.
+    Eu mostro um banner no topo, um formulário para o usuário preencher os dados,
+    um botão para enviar o cadastro e um link para ir para a página de login.
+    */
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
             <section className="w-full max-w-md space-y-8">
+                {/* Banner da aplicação */}
                 <figure className="flex justify-center">
                     <img src={banner} alt="Banner da aplicação" className="w-100 h-auto object-contain"/>
                 </figure>
@@ -38,6 +53,7 @@ export function Cadastro() {
                         <h1 className="text-2xl text-gray-800 mb-6">Cadastro</h1>
                     </header>
                     <form className="flex flex-col gap-8" onSubmit={(e) => { e.preventDefault(); cadastrar(); }}>
+                        {/* Campo para usuário */}
                         <fieldset>
                             <label htmlFor="usuario" className="sr-only">Usuário</label>
                             <input
@@ -50,6 +66,7 @@ export function Cadastro() {
                                 required
                             />
                         </fieldset>
+                        {/* Campo para e-mail */}
                         <fieldset>
                             <label htmlFor="email" className="sr-only">E-mail</label>
                             <input
@@ -62,6 +79,7 @@ export function Cadastro() {
                                 required
                             />
                         </fieldset>
+                        {/* Campo para senha */}
                         <fieldset>
                             <label htmlFor="senha" className="sr-only">Senha</label>
                             <input
@@ -74,6 +92,7 @@ export function Cadastro() {
                                 required
                             />
                         </fieldset>
+                        {/* Botão para enviar o formulário */}
                         <fieldset className="flex justify-center">
                             <button
                                 type="submit"
@@ -84,6 +103,7 @@ export function Cadastro() {
                             </button>
                         </fieldset>
                     </form>
+                    {/* Link para a página de login */}
                     <footer className="mt-10 text-center">
                         <p className="text-gray-600">
                             Já tem uma conta? {' '}
