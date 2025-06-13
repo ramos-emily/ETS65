@@ -83,6 +83,7 @@ TEMPLATES = [
     },
 ]
 
+#banco usado no senai com workbanck
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -93,6 +94,20 @@ DATABASES = {
         "PORT": "3306",
     }
 }
+
+
+# banco usado na bosch com xampp
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "bancozinho",
+#         "USER": "root",
+#         "PASSWORD": "root",
+#         'HOST': '127.0.0.1',
+#         "PORT": "3306",
+#     }
+# }
+
 
 WSGI_APPLICATION = 'smart_city.wsgi.application'
 
