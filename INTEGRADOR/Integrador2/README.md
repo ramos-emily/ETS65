@@ -172,7 +172,7 @@ Integração com front-end React para exibir e gerenciar os dados dos sensores
 Projeto acadêmico desenvolvido para fins de aprendizado no SENAI “Roberto Mange”.
 
 ✏️ Observações
-Para o login do superusuário, utilize seu primeiro nome (sem acento) e o número de matrícula como senha, conforme exigido pelo projeto.
+Para o login do superusuário, utilize "emily - 24240155", conforme exigido pelo projeto.
 
 Os dados dos sensores são simulados durante a fase de testes.
 
