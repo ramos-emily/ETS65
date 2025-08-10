@@ -1,10 +1,10 @@
+import { useRef } from "react";
 import HeaderBosch from "../Components/Header/header";
 import time from "/time.png";
 import Footer from "../Components/Footer/footer";
 
 const API_URL = "https://ranking-api.vercel.app";
 
-// Função para enviar resultado do jogo para a API
 export async function enviarResultado(nome, pontos, tempo) {
   try {
     const res = await fetch(`${API_URL}/ranking`, {
@@ -21,6 +21,19 @@ export async function enviarResultado(nome, pontos, tempo) {
 }
 
 export default function Home() {
+  const iframeRef = useRef(null);
+
+  const handleFullscreen = () => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe && iframe.webkitRequestFullscreen) { // Safari
+      iframe.webkitRequestFullscreen();
+    } else if (iframe && iframe.msRequestFullscreen) { // IE11
+      iframe.msRequestFullscreen();
+    }
+  };
+
   return (
     <>
       <HeaderBosch />
@@ -62,18 +75,25 @@ export default function Home() {
 
         <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-10 mt-3 sm:mt-4 flex justify-end">
           <button
+            onClick={handleFullscreen}
             className="
               bg-[#007BC0] text-white py-2 px-2 sm:px-6
               text-[8px] sm:text-base hover:bg-[#00629A] transition-colors
             "
           >
-            Tela cheia
+            TELA CHEIA
           </button>
         </div>
 
-        <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-10 mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-[50px]">
-          <div className="bg-gray-300 w-full h-[250px] sm:h-[150px] md:h-[750px]" />
-        </div>
+    <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-10 mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-[50px]">
+      <iframe
+        ref={iframeRef}
+        src="/index.html"  
+        title="Meu Jogo Godot"
+        className="w-full h-[250px] sm:h-[150px] md:h-[300px]"
+        style={{ border: 'none' }}
+      />
+    </div>
       </section>
 
       <Footer />
