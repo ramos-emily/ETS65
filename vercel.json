@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/godot/:path*",
+      "destination": "/godot/:path*"
+    }
+  ]
+}
