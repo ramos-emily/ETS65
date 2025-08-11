@@ -90,7 +90,7 @@ export default function Home() {
         ref={iframeRef}
         src="/godot/index.html" 
         title="Jogo ETS"
-        className="w-full h-[250px] sm:h-[150px] md:h-[300px]"
+        className="w-full h-[300px] sm:h-[300px] md:h-[300px]"
         style={{ border: "none" }}
       />
     </div>
