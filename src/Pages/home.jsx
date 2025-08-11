@@ -88,8 +88,8 @@ export default function Home() {
     <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-10 mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-[50px]">
       <iframe
         ref={iframeRef}
-        src="/godot/index.html"
-        title="Meu Jogo Godot"
+        src="/godot/index.html" 
+        title="Jogo ETS"
         className="w-full h-[250px] sm:h-[150px] md:h-[300px]"
         style={{ border: "none" }}
       />
