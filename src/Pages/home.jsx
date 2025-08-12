@@ -85,15 +85,19 @@ export default function Home() {
           </button>
         </div>
 
-    <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-10 mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-[50px]">
-      <iframe
-        ref={iframeRef}
-        src="/godot/index.html" 
-        title="Jogo ETS"
-        className="w-full h-[300px] sm:h-[300px] md:h-[300px]"
-        style={{ border: "none" }}
-      />
-    </div>
+<div className="mx-auto w-full max-w-[80vw] px-2 sm:px-4 md:px-4 mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-[50px]">
+  <div className="w-full aspect-[16/9]">
+    <iframe
+      ref={iframeRef}
+      src="/godot/index.html"
+      title="Jogo ETS"
+      className="w-full h-full"
+      style={{ border: "none" }}
+    />
+  </div>
+</div>
+
+
       </section>
 
       <Footer />
