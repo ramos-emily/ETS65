@@ -92,12 +92,10 @@ export default function Home() {
       src="/godot/index.html"
       title="Jogo ETS"
       className="w-full h-full"
-      style={{ border: "none" }}
+      style={{ border: "none", backgroundColor: "white" }}
     />
   </div>
 </div>
-
-
       </section>
 
       <Footer />
