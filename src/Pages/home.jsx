@@ -25,23 +25,6 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Entrar em tela cheia automaticamente quando o componente montar
-    const enterFullscreen = () => {
-      const element = document.documentElement;
-      if (element.requestFullscreen) {
-        element.requestFullscreen().catch(err => {
-          console.log('Erro ao tentar tela cheia automática:', err);
-        });
-      } else if (element.webkitRequestFullscreen) { // Safari
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) { // IE11
-        element.msRequestFullscreen();
-      }
-    };
-
-    // Tentar entrar em tela cheia automaticamente
-    enterFullscreen();
-
     function handleResize() {
       setDimensions({
         width: window.innerWidth,
@@ -52,6 +35,17 @@ export default function Home() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleFullscreen = () => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe && iframe.webkitRequestFullscreen) { // Safari
+      iframe.webkitRequestFullscreen();
+    } else if (iframe && iframe.msRequestFullscreen) { // IE11
+      iframe.msRequestFullscreen();
+    }
+  };
 
   // Calcular o tamanho do iframe baseado na proporção 16:9
   const calculateIframeSize = () => {
@@ -99,6 +93,17 @@ export default function Home() {
               backgroundColor: 'white' 
             }}
           />
+          
+          {/* Botão de tela cheia */}
+          <button 
+            onClick={handleFullscreen}
+            className="absolute bottom-2 right-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md opacity-80 hover:opacity-100 transition-all z-10"
+            title="Tela Cheia"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+            </svg>
+          </button>
         </div>
       </main>
     </div>
