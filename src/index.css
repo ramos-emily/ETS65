@@ -1,16 +1,1 @@
 @import "tailwindcss";
-
-:root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: "BoschSansMedium";
-}
-
-@font-face {
-  font-family: "BoschSansMedium";
-  src: local("MinhaFonte"), url("/public/BoschSans-Medium-v5_003.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
