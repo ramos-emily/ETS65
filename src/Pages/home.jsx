@@ -70,7 +70,7 @@ export default function Home() {
   const iframeSize = calculateIframeSize();
 
   return (
-    <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
+    <div className="h-screen flex flex-col bg-black overflow-hidden">
       <main className="flex-1 flex items-center justify-center p-0 overflow-hidden">
         <div 
           className="relative flex items-center justify-center" 
